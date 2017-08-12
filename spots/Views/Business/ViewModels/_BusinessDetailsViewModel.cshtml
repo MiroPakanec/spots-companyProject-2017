@@ -1,0 +1,26 @@
+﻿<script type="text/javascript">
+
+    var ViewModel = function () {
+
+        var self = this;
+
+        self.businessId = ko.observable("@Model.Id");
+
+        self.getFeatureEvents = function() {
+
+            GetFeatureEvents(function(response, target) {
+                $(target).html(response);
+            }, self.businessId());
+        }
+    }
+
+    var viewModel = new ViewModel();
+
+
+    $(function () {
+        ko.applyBindings(viewModel);
+
+        viewModel.getFeatureEvents();
+    });
+
+</script>

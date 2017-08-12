@@ -1,0 +1,39 @@
+﻿@using Castle.Core.Internal
+@model spots.Modules.Calendar.Interfaces.IDayUnit
+@if (Model.Day.IsNullOrEmpty())
+{
+    <div class="row day-unit bg-color-standard-light border-down border-standard"></div>
+
+}
+else
+{
+
+    <div class="row day-unit bg-color-standard-white border-down border-standard">
+        <button class="btn btn-standard-white btn-block btn-day" value="@Model.Day" data-bind="click: dayUnitClick">
+            <div class="col-xs-12 pd-sm-up pd-sm-down tracked">
+                @Model.Day
+            </div>
+        </button>
+        <hr class="border-standard-light no-margin pd-sm-down"/>
+        <div class="col-xs-12">
+            <div class="row">
+                <div class="col-xs-12">
+                    @foreach (var anEvent in Model.Events)
+                    {
+                        <div class="row mg-xs-down">
+                            <button class="btn btn-standard btn-event tracked" value="@anEvent.MongoId" data-bind="click: eventClick">
+                                <div class="col-xs-4 tracked">
+                                    @anEvent.Time
+                                </div>
+                                <div class="col-xs-8 tracked">
+                                    <p class="overflow tracked">@anEvent.Title</p>
+                                </div>
+                            </button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

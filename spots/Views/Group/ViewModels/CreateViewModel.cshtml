@@ -1,0 +1,80 @@
+﻿<script type="text/javascript">
+
+    var ViewModel = function () {
+
+        var self = this;
+
+        self.emailResponse = ko.observable("");
+        self.name = ko.observable("");
+        self.description = ko.observable("");
+        self.createdBy = ko.observable("@Model.CreatedBy");
+
+        self.memberList = new MemberListViewModel();
+
+        self.removeAll = function() {
+
+            self.memberList.newMember("");
+            self.name("");
+            self.description("");
+
+            self.memberList.alreadyInList(false);
+
+            self.memberList.items.removeAll();
+            self.memberList.items([
+                { name: "@Model.CreatedBy", canRemove: false }
+            ]);
+        }
+
+        self.clearInput = function (observable) {
+            observable("");
+        }
+
+        self.isRemoveable = function (observable){
+
+            if (observable().length > 0) {
+                return true;
+            }
+
+            return false;
+        }
+
+        self.submit = function() {
+
+            var form = $("#create-group-form");
+            if ($(form).valid() === false) return;
+
+            var data = self.serialize();
+            
+            CreateGroup(function (response, target) {
+
+                $(target).html(response);
+
+                if ($(response).find(".has-success")) {
+                    self.removeAll();
+                }
+            }, data);
+        }
+
+        self.serialize = function() {
+            
+            var data = {};
+            data["Name"] = self.name();
+            data["Description"] = self.description();
+            data["Members"] = self.memberList.output();
+
+            return data;
+        }
+    }
+
+    var viewModel = new ViewModel();
+
+    viewModel.memberList.newMember.subscribe(function (value) {
+
+        SearchBoxUpdate(value, viewModel);
+        ConfirmUpdate(value, viewModel);
+    });
+
+    $(function () {
+        ko.applyBindings(viewModel, document.getElementById("addmember"));
+    });
+</script>

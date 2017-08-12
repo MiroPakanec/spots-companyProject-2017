@@ -1,0 +1,26 @@
+﻿<script type="text/javascript">
+
+        var ViewModel = function() {
+            var self = this;
+            self.isLoaded = ko.observable(true);
+
+            //Content
+            self.content = ko.observable("");
+
+            self.menuClick = function(url) {
+
+                GetContent(function(response) {
+                        self.content(response);
+                    },
+                    url);
+            }
+        }
+
+        var detailsViewModel = new ViewModel();
+
+        $(function() {
+
+            ko.applyBindings(detailsViewModel);
+        });
+
+</script>

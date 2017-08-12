@@ -1,0 +1,55 @@
+﻿@model spots.Models.Spot.Spot
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_InLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Spot</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MongoId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MongoId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MongoLocationId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MongoLocationId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Capacity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Capacity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Visible)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Visible)
+        </dd>
+
+    </dl>
+</div>

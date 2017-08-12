@@ -1,0 +1,28 @@
+﻿    div input.settings {
+        position: absolute;
+            top:0;
+            right:0;
+    }
+
+    div input.see-more {
+          width: 100px;
+    }
+
+    /*p#spots-information{
+        text-align: justify;
+    }*/
+
+    .row-unit {
+    height: 200px;
+    /*max-height: 300px;*/ /*TO DO WITH OR WITHOUT MAX HEIGHT*/
+
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#feature-events-height{
+    height: 410px;
+
+    overflow-x: hidden;
+    overflow-y: scroll;
+}

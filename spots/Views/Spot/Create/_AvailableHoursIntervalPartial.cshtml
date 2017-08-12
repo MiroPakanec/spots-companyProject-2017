@@ -1,0 +1,50 @@
+﻿@model spots.Models.Spot.ViewModels.AvailableHoursTimeIntervalViewModel
+
+    <div class="col-lg-4 col-md-12">
+        <div class="row mg-sm-down mg-xs-right">
+            <div class="col-xs-12 border-all border-standard">
+                <div class="row mg-sm-up">
+                    <label class="col-xs-4">From</label>
+                    <div class="input-group date timepicker col-xs-8" id="from">
+                        <input type="text" error="#time-error" class="form-control time-interval-from" readonly="readonly" value="@Model.StartDate" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-time"></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="row mg-sm-up">
+                    <label class="col-xs-4">To</label>
+                    <div class="input-group date timepicker col-xs-8" id="to">
+                        <input type="text" error="#time-error" class="form-control time-interval-to" readonly="readonly" value="@Model.EndDate" data-bind="value:to" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-time"></span>
+                        </span>
+                    </div>
+                </div>
+                <!--Err-->
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p class="text-danger error" id="time-error">Time cannot be empty.</p>
+                    </div>
+                </div>
+                <div class="row mg-sm-up">
+                    <div class="col-xs-10 col-xs-offset-1">
+                        <div class="row">
+                            <div class="col-xs-10">
+                                <p class="text-right">Remove time interval</p>
+                            </div>
+                            <div class="col-xs-2 pd-sm-down">
+                                <!--Remove button-->
+                                <button id="@Model.Id" type="button" class="btn btn-sm btn-remove-time-interval">
+                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@Scripts.Render("~/bundles/datetimepicker-js")
+

@@ -1,0 +1,30 @@
+﻿@model spots.Models.Group.ViewModels.GroupDetailsViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_InLayout.cshtml";
+}
+
+@Html.Partial("Details/Shared/_HeaderButtonsPartial")
+<hr class="border-standard-light mg-sm-up mg-sm-down" />
+
+@Html.Partial("Details/Shared/_ContentPartial")
+
+@Html.Partial("ViewModels/_DetailsViewModel")
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/AddMember")
+}
+
+@Styles.Render("~/Content/Group")
+
+
+
+
+
+
+
+
+
+

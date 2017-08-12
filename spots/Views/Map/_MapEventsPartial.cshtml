@@ -1,0 +1,33 @@
+﻿@model spots.Modules.Map.Models.MapDetailsViewModel
+
+<script>
+
+    $(function() {
+
+        LoadEvents();
+    });
+
+
+    function LoadEvents() {
+        
+        var geolocations = @Html.Raw(Json.Encode(Model.Geolocations));
+        var featureMarkers = getMarkersFromGeolocations(geolocations);
+
+        //var position = getPosition(57.0470762, 9.9191642);
+
+        var mapOptions = {
+            zoom: getDefaultZoom(),
+            center: getPosition(@Model.CenterPosition.Latitude, @Model.CenterPosition.Longitude)
+        }
+
+        var map = getMap(mapOptions);
+
+        for (var i = 0, marker; featureMarker = featureMarkers[i]; i++) {
+
+            var marker = getMarker(map, featureMarker, "");
+            marker.setMap(map);
+        }
+    }
+</script>
+
+

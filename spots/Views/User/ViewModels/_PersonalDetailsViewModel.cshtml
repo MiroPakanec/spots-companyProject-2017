@@ -1,0 +1,167 @@
+﻿<script type="text/javascript">
+
+    var PersonalViewModel = function () {
+        var self = this;
+
+        self.id = '@Model.MongoId';
+        self.email = '@Model.Email';
+        self.firstName = ko.observable('@Model.FirstName');
+        self.middleName = ko.observable('@Model.MiddleName');
+        self.lastName = ko.observable('@Model.LastName');
+        self.age = ko.observable('@Model.Age');
+        self.groupId = ko.observable("");
+        self.token = ko.computed(function () {
+            var form = $('#personalDetailsForm');
+            return $('input[name="__RequestVerificationToken"]', form).val();
+        });
+
+        self.firstNameInput = ko.observable("@Model.FirstName");
+        self.middleNameInput = ko.observable("@Model.MiddleName");
+        self.lastNameInput = ko.observable("@Model.LastName");
+        self.ageInput = ko.observable("@Model.Age");
+
+        self.fullName = ko.computed(function () {
+            return self.firstName() + " " + self.middleName() + " " + self.lastName();
+        });
+
+
+        self.serialized = ko.computed(function () {
+
+            var data = {};
+
+            data["Id"] = self.id;
+            data["Email"] = self.email;
+
+            data["FirstName"] = self.firstNameInput();
+            data["MiddleName"] = self.middleNameInput();
+            data["LastName"] = self.lastNameInput();
+            data["Age"] = self.ageInput();
+        
+            data["__RequestVerificationToken"] = self.token();
+
+            return data;
+        });
+
+        self.isRemoveable = function (observableInput) {
+
+            if (observableInput().length <= 0)
+                return false;
+
+            return true;
+        }
+
+        self.isConfirmable = function (observableModel, observableModelInput) {
+            if (observableModel() === observableModelInput())
+                return false;
+
+            return true;
+        }
+
+        self.areAllConfirmable = function () {
+
+            if (self.isConfirmable(self.firstName, self.firstNameInput) ||
+                self.isConfirmable(self.middleName, self.middleNameInput) ||
+                self.isConfirmable(self.lastName, self.lastNameInput) ||
+                self.isConfirmable(self.age, self.ageInput)) {
+
+                return true;
+            }
+            
+            return false;
+        }
+
+        self.clearInput = function (observableInput) {
+
+            observableInput("");
+        }
+
+        self.setInput = function (observableInput, observableModel) {
+            observableInput(observableModel());
+        }
+
+        self.setModel = function(observableModel, observableInput) {
+            observableModel(observableInput());
+        }
+
+        self.updateInputs = function () {
+
+            self.firstNameInput(self.firstName());
+            self.middleNameInput(self.middleName());
+            self.lastNameInput(self.lastName());
+            self.ageInput(self.age());
+        }
+
+        self.updateModel = function () {
+
+            self.firstName(self.firstNameInput());
+            self.middleName(self.middleNameInput());
+            self.lastName(self.lastNameInput());
+            self.age(self.ageInput());
+        }
+
+        self.submitOne = function (observableInput, key, observableModel) {
+
+            var data = self.serialized();
+            data[key] = observableInput();
+
+            SubmitOne(function (response, target) {
+
+                $(target).html(response);
+
+                if($(target).find("#response").hasClass("has-success")){
+                    self.setModel(observableModel, observableInput);
+                }
+            }, data);
+        }
+
+        self.submit = function() {
+            
+            var data = self.serialized();
+
+            CreateLocation(function(response, target) {
+
+                $(target).html(response);
+                if ($(target).find("#response").hasClass("has-success")) {
+                    self.updateModel();
+                }
+            }, data);
+        }
+
+        self.getFriendButton = function () {
+            var userId = window.location.pathname.substring(14);
+            var url1 = "/User/GetFriendGroupId?userId=" + userId;
+            GetGroupId(function (response) {
+                if (response === "") {
+                    return;
+                }
+                self.groupId(response);
+
+                var url2 = "/Group/IsUserGroupMember?userId=" + userId + "&groupId=" + self.groupId();
+                IsUserYourFriend(function (response) {
+
+                    if (response == "True") {
+                        GetRemoveButton(function (response, target) {
+                            $(target).html(response);
+                        });
+                    }
+                    else {
+
+                        GetAddButton(function (response, target) {
+                            $(target).html(response);
+                        });
+                    }
+                }, url2);
+            }, url1);
+        }
+    }
+
+    var personalViewModel = new PersonalViewModel();
+
+    $(function () {
+        ko.applyBindings(personalViewModel, document.getElementById("personal-details"));
+
+        //load
+        personalViewModel.getFriendButton();
+    });
+
+</script>

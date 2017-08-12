@@ -1,0 +1,48 @@
+﻿@model IEnumerable<spots.Modules.Calendar.ViewModels.CalendarFeatureEventViewModel>
+
+<div id="calendar-feature-panel">
+    @if (Model.Any() == false)
+    {
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="row pd-md-up pd-md-down border-down border-standard">
+                    <div class="col-xs-12">
+                        <div class="row">
+                            <div class="col-xs-12 text-center">
+                                There are no events scheduled for this day.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-xs-12">
+                @foreach (var item in Model)
+                {
+                    <div class="row border-down border-standard">
+                        <button class="btn btn-standard btn-block btn-event tracked" value="@item.MongoId" data-bind="click: eventClick">
+                            <div class="col-xs-12 pd-md-up pd-md-down">
+                                <div class="row">
+                                    <div class="col-xs-4 text-center tracked">
+                                        <p class="tracked">@item.StartTime - @item.EndTime</p>
+                                    </div>
+                                    <div class="col-xs-8 text-center tracked">
+                                        <p class="tracked">@item.Title</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
+
+@Html.Partial("ViewModels/_DayUnitViewModel")
+

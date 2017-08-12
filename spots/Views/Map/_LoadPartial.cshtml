@@ -1,0 +1,14 @@
+﻿@model spots.Modules.Map.Models.MapDetailsViewModel
+
+<div class="row">
+    <div class="col-xs-12 no-side-padding">
+        <div id="smap" class=""></div>
+    </div>
+</div>
+
+@Html.Partial("Config/_MapConfigPartial", @Model.Geolocations)
+
+@Styles.Render("~/Content/Map")
+
+
+

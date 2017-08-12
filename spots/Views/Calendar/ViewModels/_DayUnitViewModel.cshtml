@@ -1,0 +1,26 @@
+﻿<script type="text/javascript">
+
+        var DayUnitViewModel = function() {
+
+            var self = this;
+
+            self.eventClick = function(data, event) {
+                var eventTarget = event.target || event.srcElement;
+
+                var postData = {};
+                postData["id"] = $(eventTarget).closest(".btn-event").val();
+
+                GetEventDetails(function(response, target) {
+
+                    $(target).html(response);
+                }, postData);
+            }
+        }
+
+    var dayUnitViewModel = new DayUnitViewModel();
+
+    $(function() {
+
+        ko.applyBindings(dayUnitViewModel, document.getElementById("calendar-feature-panel"));
+    });
+</script>

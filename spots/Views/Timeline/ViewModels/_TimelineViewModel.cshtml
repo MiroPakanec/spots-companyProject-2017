@@ -1,0 +1,92 @@
+﻿<script>
+    var ViewModel = function() {
+
+        var self = this;
+
+        self.urlPast = "/Timeline/GetPastTimeLineEvetns";
+        self.urlFuture = "/Timeline/GetTimeLineEvetns";
+
+        self.skip = ko.observable(0);
+        self.isHistory = ko.observable(false);
+        self.isFuture = ko.observable(false);
+        self.timeout = false;
+
+        self.serialize = function() {
+
+            var data = {};
+            data["skip"] = self.skip();
+
+            return data;
+        }
+
+        self.LoadMorePosts = function() {
+
+            if (self.timeout === true) {
+                console.log("Not loading");
+                return;
+            }
+
+            console.log("Loading");
+
+            viewModel.IncrementSkip(10);
+
+            if (self.isFuture()) {
+
+                GetEventPosts(self.serialize(), self.urlFuture);
+            } else {
+                GetHistoryEventPosts(self.serialize(), self.urlPast);
+            }
+
+            self.setTimeout();
+        }
+
+        self.LoadHistoryPosts = function() {
+
+            if (self.isHistory())
+                return;
+
+            self.isHistory(true);
+            self.isFuture(false);
+            RemovePosts();
+            self.skip(0);
+
+            GetHistoryEventPosts(self.serialize(), self.urlPast);
+            ToggleHistoryButton("#history-button");
+        }
+
+        self.LoadFuturePosts = function() {
+
+            if (self.isFuture())
+                return;
+
+
+            self.isFuture(true);
+            self.isHistory(false);
+            RemovePosts();
+            self.skip(0);
+
+            GetEventPosts(self.serialize(), self.urlFuture);
+            ToggleFutureButton("#future-button");
+        }
+
+        self.IncrementSkip = function (amount) {
+            self.skip(self.skip() + amount);
+        }
+
+        self.setTimeout = function() {
+
+            self.timeout = true;
+            console.log("timeout start");
+
+            setTimeout(function () {
+
+                self.timeout = false;
+                console.log("timeout end");
+            }, 2000);
+        }
+    }
+
+    var viewModel = new ViewModel();
+    ko.applyBindings(viewModel, document.getElementById("timeline"));
+    
+</script>

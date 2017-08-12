@@ -1,0 +1,297 @@
+﻿
+<hr />
+<div class="row mg-lg-down">
+    <div class="col-xs-8 col-xs-offset-2 text-center">
+        <p>Choose when is this spot going to be available for booking</p>
+    </div>
+</div>
+
+<!--Day/ AllDay Interval-->
+<div id="monday" class="row day">
+    <div class="col-xs-12">
+        <!--Title-->
+        <div class="row">
+            <div class="col-xs-8 col-xs-offset-2" data-bind="visible: availableHoursViewModel.allDays()">
+                <p class="text-lg text-center">All week days (Monday - Sunday)</p>
+            </div>
+            <div class="col-xs-8 col-xs-offset-2" data-bind="visible: !availableHoursViewModel.allDays()">
+                <p class="text-lg">Monday</p>
+            </div>
+        </div>
+        <!--Intervals-->
+        <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+                <div class="row">
+                    <div class="monday-time-intervals time-intervals" data-bind="html: availableHoursViewModel.mondayTimeIntervals"></div>
+                </div>
+            </div>
+        </div>
+        <!--Add-->
+        <div class="row mg-sm-up" data-bind="visible: availableHoursViewModel.canIncrementCounter(availableHoursViewModel.mondayTimeIntervalCounter)">
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p class="text-center">Add time interval</p>
+                    </div>
+                    <div class="col-xs-12 text-center">
+                        <!--Add button-->
+                        <button type="button" class="btn btn-sm btn-add-time-interval">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Warning-->
+        <div class="row mg-md-up" data-bind="visible: !availableHoursViewModel.canIncrementCounter(availableHoursViewModel.mondayTimeIntervalCounter)">
+            <div class="col-xs-8 col-xs-offset-2">
+                <p class="text-center text-warning">You cannot have mroe than 3 time intervals.</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+    <!--Tuesday-->
+    <div id="tuesday" class="row day" data-bind="visible: !availableHoursViewModel.allDays()">
+        <div class="col-xs-12 no-side-padding">
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-2">
+                    <p class="text-lg">Tuesday</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-2">
+                    <div class="tuesday-time-intervals time-intervals" data-bind="html: availableHoursViewModel.tuesdayTimeIntervals"></div>
+                </div>
+            </div>
+            <div class="row mg-sm-up" data-bind="visible: availableHoursViewModel.canIncrementCounter(availableHoursViewModel.tuesdayTimeIntervalCounter)">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <p class="text-center">Add time interval</p>
+                        </div>
+                        <div class="col-xs-12 text-center">
+                            <!--Add button-->
+                            <button type="button" class="btn btn-sm btn-add-time-interval">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Warning-->
+            <div class="row mg-sm-up" data-bind="visible: !availableHoursViewModel.canIncrementCounter(availableHoursViewModel.tuesdayTimeIntervalCounter)">
+                <div class="col-xs-8 col-xs-offset-2">
+                    <p class="text-center text-warning">You cannot have mroe than 3 time intervals.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Wednesday-->
+    <div id="wednesday" class="row day" data-bind="visible: !availableHoursViewModel.allDays()">
+        <div class="col-xs-12 no-side-padding">
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-2">
+                    <p class="text-lg">Wednesday</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-2">
+                    <div class="wednesday-time-intervals time-intervals" data-bind="html: availableHoursViewModel.wednesdayTimeIntervals"></div>
+                </div>
+            </div>
+            <div class="row mg-sm-up" data-bind="visible: availableHoursViewModel.canIncrementCounter(availableHoursViewModel.wednesdayTimeIntervalCounter)">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <p class="text-center">Add time interval</p>
+                        </div>
+                        <div class="col-xs-12 text-center">
+                            <!--Add button-->
+                            <button type="button" class="btn btn-sm btn-add-time-interval">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Warning-->
+            <div class="row mg-sm-up" data-bind="visible: !availableHoursViewModel.canIncrementCounter(availableHoursViewModel.wednesdayTimeIntervalCounter)">
+                <div class="col-xs-8 col-xs-offset-2">
+                    <p class="text-center text-warning">You cannot have mroe than 3 time intervals.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Thursday-->
+    <div id="thursday" class="row day" data-bind="visible: !availableHoursViewModel.allDays()">
+        <div class="col-xs-12 no-side-padding">
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-2">
+                    <p class="text-lg">Thursday</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-2">
+                    <div class="thursday-time-intervals time-intervals" data-bind="html: availableHoursViewModel.thursdayTimeIntervals"></div>
+                </div>
+            </div>
+            <div class="row mg-sm-up" data-bind="visible: availableHoursViewModel.canIncrementCounter(availableHoursViewModel.thrursdayTimeIntervalCounter)">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <p class="text-center">Add time interval</p>
+                        </div>
+                        <div class="col-xs-12 text-center">
+                            <!--Add button-->
+                            <button type="button" class="btn btn-sm btn-add-time-interval">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Warning-->
+            <div class="row mg-sm-up" data-bind="visible: !availableHoursViewModel.canIncrementCounter(availableHoursViewModel.thrursdayTimeIntervalCounter)">
+                <div class="col-xs-8 col-xs-offset-2">
+                    <p class="text-center text-warning">You cannot have mroe than 3 time intervals.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Friday-->
+    <div id="friday" class="row day" data-bind="visible: !availableHoursViewModel.allDays()">
+        <div class="col-xs-12 no-side-padding">
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-2">
+                    <p class="text-lg">Friday</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-2">
+                    <div class="friday-time-intervals time-intervals" data-bind="html: availableHoursViewModel.fridayTimeIntervals"></div>
+                </div>
+            </div>
+            <div class="row mg-sm-up" data-bind="visible: availableHoursViewModel.canIncrementCounter(availableHoursViewModel.fridayTimeIntervalCounter)">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <p class="text-center">Add time interval</p>
+                        </div>
+                        <div class="col-xs-12 text-center">
+                            <!--Add button-->
+                            <button type="button" class="btn btn-sm btn-add-time-interval">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Warning-->
+            <div class="row mg-sm-up" data-bind="visible: !availableHoursViewModel.canIncrementCounter(availableHoursViewModel.fridayTimeIntervalCounter)">
+                <div class="col-xs-8 col-xs-offset-2">
+                    <p class="text-center text-warning">You cannot have mroe than 3 time intervals.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Saturday-->
+    <div id="saturday" class="row day" data-bind="visible: !availableHoursViewModel.allDays()">
+        <div class="col-xs-12 no-side-padding">
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-2">
+                    <p class="text-lg">Saturday</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-2">
+                    <div class="saturday-time-intervals time-intervals" data-bind="html: availableHoursViewModel.saturdayTimeIntervals"></div>
+                </div>
+            </div>
+            <div class="row mg-sm-up" data-bind="visible: availableHoursViewModel.canIncrementCounter(availableHoursViewModel.saturdayTimeIntervalCounter)">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <p class="text-center">Add time interval</p>
+                        </div>
+                        <div class="col-xs-12 text-center">
+                            <!--Add button-->
+                            <button type="button" class="btn btn-sm btn-add-time-interval">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Warning-->
+            <div class="row mg-sm-up" data-bind="visible: !availableHoursViewModel.canIncrementCounter(availableHoursViewModel.saturdayTimeIntervalCounter)">
+                <div class="col-xs-8 col-xs-offset-2">
+                    <p class="text-center text-warning">You cannot have mroe than 3 time intervals.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Sunday-->
+    <div id="sunday" class="row day" data-bind="visible: !availableHoursViewModel.allDays()">
+        <div class="col-xs-12 no-side-padding">
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-2">
+                    <p class="text-lg">Sunday</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-2">
+                    <div class="sunday-time-intervals time-intervals" data-bind="html: availableHoursViewModel.sundayTimeIntervals"></div>
+                </div>
+            </div>
+            <div class="row mg-sm-up" data-bind="visible: availableHoursViewModel.canIncrementCounter(availableHoursViewModel.sundayTimeIntervalCounter)">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <p class="text-center">Add time interval</p>
+                        </div>
+                        <div class="col-xs-12 text-center">
+                            <!--Add button-->
+                            <button type="button" class="btn btn-sm btn-add-time-interval">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Warning-->
+            <div class="row mg-sm-up" data-bind="visible: !availableHoursViewModel.canIncrementCounter(availableHoursViewModel.sundayTimeIntervalCounter)">
+                <div class="col-xs-8 col-xs-offset-2">
+                    <p class="text-center text-warning">You cannot have mroe than 3 time intervals.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+    <!--Check box-->
+    <div class="row mg-sm-up">
+        <div class="col-xs-8 col-xs-offset-2">
+            <p class="text-center">Apply for all weekdays (Monday - Sunday)</p>
+        </div>
+        <!--Center quick fix-->
+        <div class="col-xs-2 col-xs-offset-5">
+            <div class="row">
+                <div class="col-xs-2 col-xs-offset-5">
+                    <input type="checkbox" data-bind="checked: availableHoursViewModel.allDays" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <p class="text-danger text-center" data-bind="visible: !availableHoursViewModel.areDatesCorrect()">Some of the entered dates are not correct</p>
+        </div>
+    </div>

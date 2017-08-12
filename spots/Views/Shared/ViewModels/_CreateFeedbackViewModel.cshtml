@@ -1,0 +1,51 @@
+﻿<script type="text/javascript">
+
+    var FeedbackViewModel = function () {
+
+        var self = this;
+
+        self.type = ko.observable("suggestion");
+        self.message = ko.observable("");
+        self.anonymous = ko.observable(false);
+        self.url = ko.observable(window.location.pathname);
+
+        self.submit = function () {
+            //if ($(self.message()).length() > 0) {
+            //    return;
+            //}
+
+            var data = self.serialize();
+            console.log(data);
+
+            Submit(function (response, target) {
+                $(target).html(response);
+                if ($(response).find(".has-success") !==null) {
+                    self.clearAllInputs();
+                }
+            }, data);
+        }
+
+        self.clearAllInputs = function () {
+            self.type("suggestion");
+            self.message("");
+            self.anonymous(false);
+            self.url(window.location.href);
+        }
+
+        self.serialize = function () {
+            var data = {};
+            data["Type"] = self.type();
+            data["Message"] = self.message();
+            data["AnonymousBox"] = self.anonymous();
+            data["CurrentPage"] = self.url(); //Check from server side viewmodel
+
+            return data;
+        }
+
+    }
+
+    var feedbackViewModel = new FeedbackViewModel();
+
+    //ko.applyBindings(feedbackViewModel);
+    ko.applyBindings(feedbackViewModel, document.getElementById("feedback-partial"));
+</script>

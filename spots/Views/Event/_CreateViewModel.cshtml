@@ -1,0 +1,82 @@
+﻿<!--View model-->
+<script type="text/javascript">
+
+    var ViewModel = function () {
+
+        var self = this;
+
+        self.locationInput = ko.observable("");
+        self.startDateInput = ko.observable("");
+        self.endDateInput = ko.observable("");
+        self.titleInput = ko.observable("");
+        self.descriptionInput = ko.observable("");
+
+        self.startDateSelected = ko.observable("");
+        self.endDateSelected = ko.observable("");
+
+        self.availableSpotsResponse = ko.observable("");
+        self.usersInvitationResponse = ko.observable("");
+
+        self.locationNotify = ko.observable(true);
+
+       self.sneakyUpdate = function(observableInput, observableNotify, value) {
+            observableNotify(false);
+            observableInput(value);
+            observableNotify(true);
+        }
+
+        self.clearInput = function (observableInput) {
+            observableInput("");
+        }
+
+        self.isRemoveable = function(observableInput) {
+            if (observableInput().length <= 0)
+                return false;
+
+            return true;
+        }
+
+        self.hasAvailableSpotsResponse = ko.computed(function () {
+
+            if (self.availableSpotsResponse().length <= 0)
+                return false;
+
+            return true;
+        });
+
+        self.hasSpots = function() {
+
+            var response = self.availableSpotsResponse();
+            var noSpots = (response.match(/btn-spot/g) || []).length;
+
+            if (self.hasAvailableSpotsResponse() && noSpots > 0) {
+                return true;
+            }
+
+            return false;
+        }
+    }
+
+    var viewModel = new ViewModel();
+
+    /*Subscribers*/
+    viewModel.locationInput.subscribe(function (value) {
+        if (viewModel.locationNotify()) {
+            GetCities(value);
+        }
+    });
+
+    viewModel.startDateInput.subscribe(function (value) {
+        viewModel.startDateSelected(value);
+    });
+
+    viewModel.endDateInput.subscribe(function (value) {
+        viewModel.endDateSelected(value);
+    });
+
+    viewModel.availableSpotsResponse.subscribe(function(value) {
+        console.log("response html changed");
+    });
+
+    ko.applyBindings(viewModel);
+</script>

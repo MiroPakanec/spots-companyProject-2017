@@ -1,0 +1,173 @@
+﻿<!--View model-->
+<script type="text/javascript">
+
+    var ViewModel = function () {
+
+        var self = this;
+        self.startDateInput = ko.observable("");
+        self.locationInput = ko.observable("");
+        self.startTime = ko.observable("");
+        self.endTime = ko.observable("");
+
+        self.availableSpotsResponse = ko.observable("");
+        self.spotId = ko.observable("");
+        self.businessId = ko.observable("");
+        self.locationNotify = ko.observable(true);
+        self.visibility = ko.observable(false);
+        self.availability = ko.observable(false);
+
+        self.titleInput = ko.observable("");
+        self.descriptionInput = ko.observable("");
+
+        self.availableSpotsResponse = ko.observable("");
+
+        self.hasAvailableSpotsResponse = ko.computed(function () {
+
+            if (self.availableSpotsResponse().length <= 0)
+                return false;
+
+            return true;
+        });
+
+        self.hasSpots = function () {
+
+            var response = self.availableSpotsResponse();
+            var noSpots = (response.match(/btn-spot/g) || []).length;
+
+            if (self.hasAvailableSpotsResponse() && noSpots > 0) {
+                return true;
+            }
+
+            return false;
+        };
+
+        self.sneakyUpdate = function (observableInput, observableNotify, value) {
+
+            observableNotify(false);
+            observableInput(value);
+            observableNotify(true);
+        };
+
+        self.startDateTime = ko.computed(function () {
+            return self.startDateInput() + " " + self.startTime();
+        });
+
+        self.endDateTime = ko.computed(function () {
+            return self.startDateInput() + " " + self.endTime();
+        });
+
+        self.availableTimeSlotsResponse = ko.observable("");
+
+        self.clearInput = function (observableInput) {
+            observableInput("");
+        };
+
+        self.isRemoveable = function (observableInput) {
+
+            if (observableInput().length <= 0)
+                return false;
+
+            return true;
+        };
+
+        self.GetTimeslots = function () {
+
+            var data = {};
+            var test = self.startDateInput();
+            data["Date"] = self.startDateInput();
+            data["UserIds"] = self.GetInvitedUsersToArray();
+
+            GetTimeCityPartialContent(function (response, target) {
+
+                self.availableTimeSlotsResponse(response);
+            }, data);
+        };
+
+        self.GetInvitedUsersToArray = function () {
+
+            var data = [];
+
+            $("#people-response").find(".invited").each(function () {
+                data.push($(this).attr("id"));
+            });
+
+            console.log(data);
+            return data;
+        };
+
+        self.hasAvailableTimeSlotsResponse = ko.computed(function () {
+
+            if (self.availableTimeSlotsResponse().length <= 0)
+                return false;
+
+            return true;
+        });
+
+        self.serializeSpots = function () {
+
+            var data = {};
+            data["Location"] = self.locationInput();
+            data["StartDateTime"] = self.startDateTime();
+            data["EndDateTime"] = self.endDateTime();
+
+            return data;
+        };
+
+        self.availableSpots = function () {
+
+            var data = self.serializeSpots();
+
+            AvailableSpots(function (response) {
+
+                self.availableSpotsResponse(response);
+            }, data);
+        };
+
+        self.serialize = function () {
+
+            var data = {};
+            data["Location"] = self.locationInput();
+            data["StartDateTime"] = self.startDateTime();
+            data["EndDateTime"] = self.endDateTime();
+            data["Title"] = self.titleInput();
+            data["Description"] = self.descriptionInput();
+            data["Availability"] = self.availability();
+            data["Visibility"] = self.visibility();
+            data["SpotId"] = GetAvailableSpotId();
+            data["BusinessId"] = GetAvailableBusinessId();
+            data["Invited"] = self.GetInvitedUsersToArray();
+
+            return data;
+        };
+
+        self.submitEvent = function () {
+
+            var data = self.serialize();
+
+            SubmitEvent(function (response, target) {
+                $(target).html(response);
+            }, data);
+        };
+
+        function getSpotsResponse(response) {
+            newViewModel.availableSpotsResponse(response);
+        }
+    }
+    
+    var newViewModel = new ViewModel();
+
+    //Subscribers
+    newViewModel.locationInput.subscribe(function (value) {
+
+        if (newViewModel.locationNotify()) {
+            GetCities(value);
+        }
+    });
+
+    newViewModel.availableSpotsResponse.subscribe(function (value) {
+        console.log("response html changed");
+    });
+
+    ko.applyBindings(newViewModel);
+
+</script>

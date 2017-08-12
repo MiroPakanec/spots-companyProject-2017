@@ -1,0 +1,225 @@
+﻿<script type="text/javascript">
+
+    var AvailableHoursViewModel = function() {
+
+        var self = this;
+
+        self.allDays = ko.observable(true);
+
+        self.timeIntervals = ko.observable("");
+        self.timeIntervalCounter = ko.observable(0);
+
+        self.mondayTimeIntervals = ko.observable("");
+        self.tuesdayTimeIntervals = ko.observable("");
+        self.wednesdayTimeIntervals = ko.observable("");
+        self.thursdayTimeIntervals = ko.observable("");
+        self.fridayTimeIntervals = ko.observable("");
+        self.saturdayTimeIntervals = ko.observable("");
+        self.sundayTimeIntervals = ko.observable("");
+        
+        self.mondayTimeIntervalCounter = ko.observable(0);
+        self.tuesdayTimeIntervalCounter = ko.observable(0);
+        self.wednesdayTimeIntervalCounter = ko.observable(0);
+        self.thrursdayTimeIntervalCounter = ko.observable(0);
+        self.fridayTimeIntervalCounter = ko.observable(0);
+        self.saturdayTimeIntervalCounter = ko.observable(0);
+        self.sundayTimeIntervalCounter = ko.observable(0);
+
+        self.areDatesCorrect = ko.observable(true);
+
+        self.validateDates = function() {
+
+            var count = 0;
+            var root = ".time-intervals";
+
+            if (self.allDays()) {
+                root = ".monday-time-intervals";
+            }
+
+            $(root)
+                .find(".error")
+                .each(function() {
+
+                    if ($(this).text().length > 0) {
+                        count++;
+                    }
+                });
+
+            if (count === 0) {
+
+                self.areDatesCorrect(true);
+                return;
+            }
+
+            self.areDatesCorrect(false);
+        }
+
+        self.putTimeInterval = function(day, counterObservable, intervalsObservable) {
+            
+            if (counterObservable() === 0) {
+                intervalsObservable("");
+            }
+
+            var postData = {};
+            postData["Id"] = "btn-" + counterObservable();
+            postData["StartDate"] = "";
+            postData["EndDate"] = "";
+
+            GetAvailableHoursInterval(function (response) {
+
+                $("." + day + "-time-intervals").append(response);
+                self.validateDates();
+            }, postData);
+
+            self.incrementTimeIntervalCounter(counterObservable);
+        }
+
+        self.removeTimeInterval = function (counterObservable, intervalsObservable) {
+
+            self.decrementTimeIntervalCounter(counterObservable);
+
+            if (counterObservable() === 0) {
+                self.showIntervalWarningMessage(intervalsObservable);
+            }
+
+            self.validateDates();
+        }
+
+        self.showIntervalWarningMessage = function (intervalsObservable) {
+            
+            GetAvailableHoursIntervalWarning(function (response) {
+
+                intervalsObservable(response);
+            });
+        }
+
+        self.incrementTimeIntervalCounter = function (counterObservable) {
+
+            var count = counterObservable();
+            counterObservable(count + 1);
+        }
+
+        self.decrementTimeIntervalCounter = function (counterObservable) {
+
+            var count = counterObservable();
+            counterObservable(count - 1);
+        }
+
+        self.canIncrementCounter = function (counterObservable) {
+
+            if (counterObservable() >= 3) {
+                return false;
+            }
+
+            return true;
+        }
+
+        self.serialize = function() {
+
+            if (self.allDays()) {
+                return self.serializeAllDays();
+            }
+
+            return self.serializeIndividualDays();
+        }
+
+        self.serializeAllDays = function() {
+
+            var intervals = self.serializeTimeIntervals(".monday-time-intervals");
+            return self.getAllDays(intervals);
+        }
+
+        self.serializeIndividualDays = function() {
+
+            var data = [];
+            var counter = 0;
+
+            $(".time-intervals").each(function () {
+
+                var intervals = self.serializeTimeIntervals($(this));
+                var day = self.getDayFromInt(counter);
+
+                data.push(self.serializeDay(day, intervals));
+                counter++;
+            });
+
+            return data;
+        }
+
+        self.serializeDay = function(name, intervals) {
+
+            var day = {};
+
+            day["key"] = name;
+            day["value"] = intervals;
+
+            return day;
+        }
+
+        self.getAllDays = function(intervals) {
+
+            var data = [];
+
+            data.push(self.serializeDay("Monday", intervals));
+            data.push(self.serializeDay("Tuesday", intervals));
+            data.push(self.serializeDay("Wednesday", intervals));
+            data.push(self.serializeDay("Thursday", intervals));
+            data.push(self.serializeDay("Friday", intervals));
+            data.push(self.serializeDay("Saturday", intervals));
+            data.push(self.serializeDay("Sunday", intervals));
+
+            return data;
+        }
+
+        self.serializeTimeIntervals = function(root) {
+            
+            var timeIntervalArray = [];
+            var counter = 0;
+
+            var timeIntervals = $(root).children(".time-interval");
+            $(timeIntervals).each(function () {
+
+                var timeInterval = {};
+
+                var from = self.getIntervalTime($(this), ".time-interval-from");
+                var to = self.getIntervalTime($(this), ".time-interval-to");
+
+                var emptyDate = "01.01.0001 ";
+                timeInterval["From"] = emptyDate + from;
+                timeInterval["To"] = emptyDate + to;
+
+                timeIntervalArray[counter] = timeInterval;
+                counter++;
+            });
+
+            return timeIntervalArray;
+        }
+
+        self.getIntervalTime = function(root, target) {
+            
+            var time = $(root).find(target).val();
+
+            if (time === null || time == "undefined") {
+                return "00:00:00";
+            }
+
+            return time;
+        }
+
+        self.getDayFromInt = function(number) {
+            
+            switch(number) {
+                case (0): return "Monday";
+                case (1): return "Tuesday";
+                case (2): return "Wednesday";
+                case (3): return "Thursday";
+                case (4): return "Friday";
+                case (5): return "Saturday";
+                case (6): return "Sunday";
+                default : return "Monday";
+            }
+        }
+    }
+</script>
+
+

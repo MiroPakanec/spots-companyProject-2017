@@ -1,0 +1,58 @@
+﻿@model List<spots.Models.Spot.ViewModels.AvailableSpotsViewModel>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <!--BOX-->
+        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+            <div class="btn btn-spot btn-block btn-default mg-sm-up available-spot">
+                <div class="row no-side-padding">
+                    <div class="col-xs-12">
+                        <!--Attributes-->
+                        <div class="row">
+                            <div class="col-xs-12">
+                                @Html.ActionLink(item.BusinessName, "Details", "Business", new {id = item.BusinessId}, new {@class = "text-center tracked" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                @item.SpotName
+                            </div>
+                        </div>
+                        <div class="row mg-sm-down">
+                            <div class="col-xs-12">
+                                Capacity: @item.Capacity
+                            </div>
+                        </div>
+                        <hr class="border-standard-light no-margin"/>
+                        <div class="address text-sm color-standard">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    @item.Address
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    @item.City @item.Zip
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    @item.Country
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @Html.TextBox("spotId", item.SpotId, new{ type= "hidden"})
+            @Html.TextBox("businessId", item.BusinessId, new{ type= "hidden"})
+        </div>
+    }
+</div>
+
+@Scripts.Render("~/bundles/AvailableSpotsTools");
+
+
+
+

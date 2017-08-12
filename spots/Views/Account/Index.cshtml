@@ -1,0 +1,40 @@
+﻿@using spots.Models.Account.Viewmodels
+@model spots.Models.Account.Viewmodels.AccountViewModel
+@{
+    ViewBag.Title = "Welcome";
+}
+
+<div class="row mg-xlg-up">
+    <div class="col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 col-lg-offset-4 col-lg-4">
+        <div class="row">
+            <div class="col-xs-6 no-side-padding">
+                <input type="button" value="Register" id="btn-register" class="btn btn-default btn-block btn-sm btn-colored tracked"/>
+            </div>
+            <div class="col-xs-6 no-side-padding">
+                <input type="button" value="Login" id="btn-login" class="btn btn-default btn-block btn-sm btn-colored tracked"/>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section section-register invisible">
+    <div class="row text-lg">
+        <div class="col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 col-lg-offset-4 col-lg-4 border-standard-exclude border-color-top">
+            @Html.Partial("_RegisterPartial", Model.Register as RegisterViewModel)
+        </div>
+    </div>
+</div>
+<div class="section section-login invisible">
+    <div class="row text-lg">
+        <div class="col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 col-lg-offset-4 col-lg-4 border-standard-exclude border-color-top">
+            @Html.Partial("_LoginAccountPartial", Model.Login as LoginViewModel, new ViewDataDictionary {{"returnUrl", Model.ReturnUrl}})
+        </div>
+    </div>
+</div>
+<input type="hidden" id="visibleSection" value="@Model.Type" />
+
+@section Scripts {
+    @Scripts.Render("~/bundles/Account")
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+@Styles.Render("~/bundles/cssval")

@@ -1,0 +1,194 @@
+﻿@{
+    ViewBag.Title = "Map";
+    Layout = "~/Views/Shared/_InLayout.cshtml";
+}
+
+<div class="row border-standard-light border-down">
+    <div class="col-xs-12">
+        <div class="row">
+            <!--Search-->
+            <div class="col-xs-3">
+                <div class="row">
+                    <!--Search box-->
+                    <div class="col-xs-12 no-side-padding no-margin border-none">
+                        <input type="text" value="" class="form-control pd-xs-up pd-xs-down" placeholder="Search" data-bind="value: eventName, valueUpdate: 'keyup'" />
+                    </div>
+                </div>
+            </div>
+            <!--Start date-->
+            <div class="col-xs-3">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!--Input-->
+                        <div class="input-group date datetimepicker" id="startDate">
+                            <input type="text" class="form-control" data-bind="value: startDatetime" placeholder="Start date" value="" readonly="readonly" />
+                            <span class="input-group-addon bg-color-standard-white">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End date-->
+            <div class="col-xs-3">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!--Input-->
+                        <div class="input-group date datetimepicker" id="endDate">
+                            <input type="text" class="form-control" data-bind="value: endDatetime" placeholder="End date" value="" readonly="readonly" />
+                            <span class="input-group-addon bg-color-standard-white">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Groups-->
+            <div class="col-xs-3">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!--Dropdown-->
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div data-bind="html: mapContent"></div>
+<div id="geolocations-response"></div>
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/datetimepicker-js")
+    @Scripts.Render("~/bundles/Map")
+}
+
+<script>
+    //ViewModel
+    var ViewModel = function () {
+
+        var self = this;
+
+        self.eventName = ko.observable("");
+        self.startDatetime = ko.observable("");
+        self.endDatetime = ko.observable("");
+        self.groups = ko.observableArray();
+
+        self.activeFilter = ko.observable(true);
+
+        self.mapContent = ko.observable("");
+
+        self.loadMap = function () {
+
+            //var data = self.serializeMapFilter();
+            LoadMap(function (response) {
+
+                self.mapContent(response);
+                self.filterMap();
+            });
+        }
+
+        self.filterMap = function() {
+            
+            var data = self.serializeMapFilter();
+            console.log(data);
+            
+            LoadGeolocations(function (response, target) {
+
+                $(target).html(response);
+                console.log(response);
+
+            }, data);
+            
+        }
+
+        self.serializeMapFilter = function () {
+
+            var data = {};
+
+            data["City"] = self.eventName();
+            data["StartDate"] = self.startDatetime();
+            data["EndDate"] = self.endDatetime();
+            data["Search"] = "";
+            data["GroupName"] = "all";
+
+            return data;
+        }
+
+        self.setDefaultFilter = function() {
+
+            self.activeFilter(false);
+
+            var sdate = moment().add(-4, "days").format("DD-MM-YYYY hh:mm A");
+            var edate = moment().add(3, "days").format("DD-MM-YYYY hh:mm A");
+
+            self.eventName("");
+            self.startDatetime(sdate);
+            self.endDatetime(edate);
+
+            self.activeFilter(true);
+        }
+    }
+
+    var viewModel = new ViewModel();
+
+    //subscribers
+    viewModel.eventName.subscribe(function (value) {
+        if (viewModel.activeFilter()) {
+
+            viewModel.filterMap();
+        }
+    });
+
+    viewModel.startDatetime.subscribe(function (value) {
+        if (viewModel.activeFilter()) {
+
+            viewModel.filterMap();
+        }
+    });
+
+    viewModel.endDatetime.subscribe(function (value) {
+        if (viewModel.activeFilter()) {
+
+            viewModel.filterMap();
+        }
+    });
+
+    $(function () {
+        ko.applyBindings(viewModel);
+
+        viewModel.setDefaultFilter();
+        viewModel.loadMap();
+    });
+
+</script>
+
+<script>
+
+    function LoadMap(callback) {
+
+        AjaxCall("/Map/Load", "Get", null, null, callback, null);
+    }
+
+    function LoadGeolocations(callback, data) {
+
+        AjaxCall("/Map/LoadGeolocations", "Post", data, null, callback, "#geolocations-response");
+    }
+
+    //datepicker change
+    $(document).on("dp.change", ".datetimepicker", function () {
+
+        //update view model
+        var id = $(this).attr("id");
+        var value = $(this).find(".form-control").val();
+
+        if (id === "startDate") {
+            viewModel.startDatetime(value);
+        } else {
+            viewModel.endDatetime(value);
+        }
+    });
+</script>
+

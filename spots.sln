@@ -1,0 +1,67 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spots", "spots\spots.csproj", "{4A05C100-D589-4E4B-B69A-DE14F95FDA67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spotsUTests", "spotsTests\spotsUTests.csproj", "{B7452248-DACC-441E-89FF-1FE81B002FE0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spotsITests", "spotsITests\spotsITests.csproj", "{F8A03F87-5E27-417D-B8ED-5A63DC7C7585}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spotsATF", "spotsATF\spotsATF.csproj", "{9A1B7475-7CA4-4788-A264-6F6C1255D54A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbManager", "DbManager\DbManager.csproj", "{2FF075FC-0A04-482C-AEC5-DDCEDEF3519D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A05C100-D589-4E4B-B69A-DE14F95FDA67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A05C100-D589-4E4B-B69A-DE14F95FDA67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A05C100-D589-4E4B-B69A-DE14F95FDA67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A05C100-D589-4E4B-B69A-DE14F95FDA67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7452248-DACC-441E-89FF-1FE81B002FE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7452248-DACC-441E-89FF-1FE81B002FE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7452248-DACC-441E-89FF-1FE81B002FE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7452248-DACC-441E-89FF-1FE81B002FE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8A03F87-5E27-417D-B8ED-5A63DC7C7585}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8A03F87-5E27-417D-B8ED-5A63DC7C7585}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8A03F87-5E27-417D-B8ED-5A63DC7C7585}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8A03F87-5E27-417D-B8ED-5A63DC7C7585}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A1B7475-7CA4-4788-A264-6F6C1255D54A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A1B7475-7CA4-4788-A264-6F6C1255D54A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A1B7475-7CA4-4788-A264-6F6C1255D54A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A1B7475-7CA4-4788-A264-6F6C1255D54A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FF075FC-0A04-482C-AEC5-DDCEDEF3519D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FF075FC-0A04-482C-AEC5-DDCEDEF3519D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FF075FC-0A04-482C-AEC5-DDCEDEF3519D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FF075FC-0A04-482C-AEC5-DDCEDEF3519D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://spotsteam.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = spots\\spots.csproj
+		SccProjectName1 = spots
+		SccLocalPath1 = spots
+		SccProjectUniqueName2 = spotsATF\\spotsATF.csproj
+		SccProjectName2 = spotsATF
+		SccLocalPath2 = spotsATF
+		SccProjectUniqueName3 = spotsITests\\spotsITests.csproj
+		SccProjectName3 = spotsITests
+		SccLocalPath3 = spotsITests
+		SccProjectUniqueName4 = spotsTests\\spotsUTests.csproj
+		SccProjectName4 = spotsTests
+		SccLocalPath4 = spotsTests
+		SccProjectUniqueName5 = DbManager\\DbManager.csproj
+		SccProjectName5 = DbManager
+		SccLocalPath5 = DbManager
+	EndGlobalSection
+EndGlobal

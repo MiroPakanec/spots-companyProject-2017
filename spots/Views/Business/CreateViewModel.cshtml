@@ -1,0 +1,43 @@
+﻿<script>
+    var ViewModel = function() {
+        var self = this;
+
+        self.nameInput = ko.observable("");
+        self.taxNumberInput = ko.observable("");
+        self.ceoInput = ko.observable("");
+        self.ctoInput = ko.observable("");
+        self.phoneNumberInput = ko.observable("");
+
+        self.addressInput = ko.observable("");
+        self.zipInput = ko.observable("");
+        self.cityInput = ko.observable("");
+        self.countryInput = ko.observable("");
+
+        self.isRemoveable = function (observableInput) {
+            if (observableInput().length <= 0)
+                return false;
+
+            return true;
+        }
+
+        self.clearInput = function (observableInput) {
+            observableInput("");
+        }
+
+        self.clearAllInputs = function() {
+            self.nameInput("");
+            self.taxNumberInput("");
+            self.ceoInput("");
+            self.ctoInput("");
+            self.phoneNumberInput("");
+
+            self.cityInput("");
+            self.zipInput("");
+            self.cityInput("");
+            self.countryInput("");
+        }
+    }
+
+    var viewModel = new ViewModel();
+    ko.applyBindings(viewModel);
+</script>

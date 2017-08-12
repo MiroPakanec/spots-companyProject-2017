@@ -1,0 +1,38 @@
+﻿<script>
+
+    var BusinessViewModel = function () {
+
+        var self = this;
+        self.businessName = ko.observable("");
+        self.businessId = ko.observable("");
+
+        self.businessIdChange = function (data, event) {
+            var eventTarget = event.target || event.srcElement;
+            var id = $(eventTarget).next().val();
+            var name = $(eventTarget).html();
+
+            self.businessName(name);
+            self.businessId(id);
+
+            var postData = {};
+            postData["id"] = id;
+
+            GetLocations(function (response, target) {
+                $(target).html(response);
+            }, postData);
+
+        }
+
+        self.loadLocations = function () {
+
+            GetLocations(function (response, target) {
+                $(target).html(response);
+            }, null);
+        }
+
+    }
+
+    var businessViewModel = new BusinessViewModel();
+    ko.applyBindings(businessViewModel, document.getElementById("businsess-dropdown"));
+
+</script>

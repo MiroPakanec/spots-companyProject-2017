@@ -1,0 +1,133 @@
+﻿@model spots.Models.Location.ViewModels.CreateLocationViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_InLayout.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm("Create", "Location", FormMethod.Post, new { id = "createLocationForm" }))
+{
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+        <h4>Location</h4>
+        <hr />
+        <div class="form-group">
+            @Html.Label("Businesses", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="dropdown" role="menu">
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                        <span id="dropdown-selected">Select Businesses</span>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        @foreach (var business in Model.Businesses)
+    {
+                            <li>
+                                <a href="#" class="optionBusiness">@business.Name</a>
+                                <input type="hidden" value="@business.Id.ToString()"/>
+                            </li>
+                        }
+                    </ul>
+                    <div id="errorMessageBusiness" class="text-danger field-validation-error" style="display:none;">
+                        Please select a business
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LocationName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.LocationName, new { htmlAttributes = new { @class = "form-control", data_bind = "value:locationName, valueUpdate:'keyup'" } })
+                @Html.ValidationMessageFor(model => model.LocationName, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-xs-1">
+                <!--Remove button-->
+                <button type="button" class="btn btn-sm btn-remove" data-bind="visible: isRemoveable(locationName), click: remove.bind($data, viewModel.locationName)">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.Address, new {htmlAttributes = new {@class = "form-control", data_bind = "value:address, valueUpdate:'keyup'"}})
+                @Html.ValidationMessageFor(model => model.Address, "", new {@class = "text-danger"})
+            </div>
+            <div class="col-xs-1">
+                <!--Remove button-->
+                <button type="button" class="btn btn-sm btn-remove" data-bind="visible: isRemoveable(address), click: remove.bind($data, viewModel.address)">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Zip, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.Zip, new { htmlAttributes = new { @class = "form-control", data_bind = "value:zip, valueUpdate:'keyup'" } })
+                @Html.ValidationMessageFor(model => model.Zip, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-xs-1">
+                <!--Remove button-->
+                <button type="button" class="btn btn-sm btn-remove" data-bind="visible: isRemoveable(zip), click: remove.bind($data, viewModel.zip)">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control", data_bind = "value:city, valueUpdate:'keyup'" } })
+                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-xs-1">
+                <!--Remove button-->
+                <button type="button" class="btn btn-sm btn-remove" data-bind="visible: isRemoveable(city), click: remove.bind($data, viewModel.city)">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control", data_bind = "value:country, valueUpdate:'keyup'" } })
+                @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-xs-1">
+                <!--Remove button-->
+                <button type="button" class="btn btn-sm btn-remove" data-bind="visible: isRemoveable(country), click: remove.bind($data, viewModel.country)">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Create" class="btn btn-default" data-bind="click: submit.bind($data)"/>
+                <input type="button" value="Remove all" class="btn btn-default" data-bind="click: clearAllInputs.bind($data)">
+            </div>
+        </div>
+    </div>
+}
+<div class="row mg-lg-up">
+    <div class="col-xs-6 col-xs-offset-3">
+        <div id="locationCreate-ajax-response"></div>
+    </div>
+</div>
+
+    @Scripts.Render("~/bundles/CreateLocation")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Styles.Render("~/bundles/cssval")
+    
+
+    @Html.Partial("ViewModels/_CreateLocationViewModel")
+
+

@@ -1,0 +1,180 @@
+﻿@using Microsoft.AspNet.Identity
+@model spots.Models.User.ViewModels.UserContactViewModel
+
+@{
+    var isEditable = Model.Email == User.Identity.GetUserName();
+}
+    <!--Picture-->
+    @Html.Partial("Details/Shared/_ProfilePicturePartial")
+
+<div class="row" id="contact-details">
+    <div class="col-sm-10 col-sm-offset-1">
+        <!-- Html Form (calling ajax on submit)-->
+        @using (Html.BeginForm("ContactDetailsUpdate", "User", FormMethod.Post, new {id = "contactDetailsForm"}))
+        {
+            <!--Id-->
+            @Html.TextBoxFor(m => m.MongoId, new {type = "hidden"})
+
+            <!--Token-->
+            @Html.AntiForgeryToken()
+
+            <div class="row">
+                <div class="col-sm-12 text-sm">
+                    <p class="no-padding no-margin color-standard text-left text-md">Contact information</p>
+                </div>
+            </div>
+            <hr class="border-standard-light mg-xs-up"/>
+            <div class="row">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <div class="row">
+                        <div class="col-xs-12 col-xs-offset-0 col-md-8 col-md-offset-2">
+
+                            <!--Property-->
+                            <!--Email name-->
+                            <div class="property">
+                                <!--Property row-->
+                                <div class="row property-info pd-sm-down">
+                                    <div class="col-xs-3 text-left">
+                                        <!--Property name -->
+                                        @Html.LabelFor(m => m.Email)
+                                    </div>
+                                    <div class="col-xs-7">
+                                        <!--Property value sent to controller-->
+                                        @Html.LabelForModel(Model.Email, new {type = "text", disabled = "true"})
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Property End-->
+                            <!--Property-->
+                            <!--Phone number-->
+                            @if (isEditable)
+                            {
+                                <div class="property">
+                                    <!--Property row-->
+                                    <div class="row property-info pd-sm-down">
+                                        <div class="col-xs-3 text-left">
+                                            <!--Property name -->
+                                            @Html.LabelFor(m => m.Phone)
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <!--Property value sent to controller-->
+                                            @if (isEditable)
+                                            {
+                                                @Html.TextBoxFor(m => m.Phone, new {@class = "property-value form-control", type = "text", data_bind = "value:phoneInput, valueUpdate:'keyup'"})
+                                                @Html.ValidationMessageFor(m => m.Phone, "", new {@class = "text-danger"})
+                                            }
+                                            else
+                                            {
+                                                @Html.LabelForModel(Model.Phone, new {type = "text", disabled = "true"})
+                                            }
+                                        </div>
+                                        @if (isEditable)
+                                        {
+                                            <div class="col-xs-1">
+                                                <!--Remove button-->
+                                                <button type="button" class="btn btn-sm btn-remove" data-bind="visible: isRemoveable(phoneInput), click: clearInput.bind($data, contactViewModel.phoneInput)">
+                                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                                </button>
+                                            </div>
+                                            <div class="col-xs-1">
+                                                <!--Refresh button-->
+                                                <button type="button" class="btn btn-sm btn-confirm" data-bind="visible: isConfirmable(phone, phoneInput), click: setInput.bind($data, contactViewModel.phoneInput, contactViewModel.phone)">
+                                                    <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                                                </button>
+                                            </div>
+                                            <div class="col-xs-1">
+                                                <!--Confirm button-->
+                                                <button type="submit" class="btn btn-sm btn-confirm" , data-bind="visible: isConfirmable(phone, phoneInput), click: submitOne.bind($data, contactViewModel.phoneInput, 'Phone', contactViewModel.phone)">
+                                                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                                </button>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                            <!--Property End-->
+                            <!--Property-->
+                            <!--City-->
+                            @if (isEditable)
+                            {
+                                <div class="property">
+                                    <!--Property row-->
+                                    <div class="row property-info pd-sm-down">
+                                        <div class="col-xs-3 text-left">
+                                            <!--Property name -->
+                                            @Html.LabelFor(m => m.City)
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <!--Property value sent to controller-->
+                                            @if (isEditable)
+                                            {
+                                                @Html.TextBoxFor(m => m.City, new {@class = "property-value form-control", type = "text", data_bind = "value:cityInput, valueUpdate:'keyup'"})
+                                                @Html.ValidationMessageFor(m => m.City, "", new {@class = "text-danger"})
+                                            }
+                                            else
+                                            {
+                                                @Html.LabelForModel(Model.City, new {type = "text", disabled = "true"})
+                                            }
+                                        </div>
+                                        @if (isEditable)
+                                        {
+                                            <div class="col-xs-1">
+                                                <!--Remove button-->
+                                                <button type="button" class="btn btn-sm btn-remove" data-bind="visible: isRemoveable(cityInput), click: clearInput.bind($data, contactViewModel.cityInput)">
+                                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                                </button>
+                                            </div>
+                                            <div class="col-xs-1">
+                                                <!--Refresh button-->
+                                                <button type="button" class="btn btn-sm btn-confirm" data-bind="visible: isConfirmable(city, cityInput), click: setInput.bind($data, contactViewModel.cityInput, contactViewModel.city)">
+                                                    <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                                                </button>
+                                            </div>
+                                            <div class="col-xs-1">
+                                                <!--Confirm button-->
+                                                <button type="submit" class="btn btn-sm btn-confirm" data-bind="visible: isConfirmable(city, cityInput), click: submitOne.bind($data, contactViewModel.cityInput, 'City', contactViewModel.city)">
+                                                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                                </button>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                                <!--Property End-->
+
+                                <!--Save button-->
+                                if (isEditable)
+                                {
+                                    <div class="row mg-md-up">
+                                        <div class="col-xs-2 col-xs-offset-5">
+                                            <!--Restore button-->
+                                            <button type="button" title="Restore all" class="btn btn-sm btn-block" data-bind="visible : areAllConfirmable(), click : updateInputs">
+                                                <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Restore all
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <!--Save button-->
+                                            <button type="button" title="Save all" class="btn btn-sm btn-block btn-confirm" data-bind="click: submit">
+                                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Save all
+                                            </button>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            <!--HTML End-->
+                            <div id="user-ajax-response">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/ProfileContactDetails")
+@Scripts.Render("~/bundles/jqueryval")
+@Styles.Render("~/bundles/cssval")
+
+<!--Personal view model-->
+@Html.Partial("ViewModels/_ContactDetailsViewModel")

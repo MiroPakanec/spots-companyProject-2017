@@ -1,0 +1,35 @@
+﻿<div id="feedback-partial">
+
+    <div class="row">
+        <div class="col-xs-12 border-all border-standard pd-md-up pd-md-down">
+            <div class="feedback text-center">
+                <p class="no-margin color-standard text-md">Give us Feedback</p>
+            </div>
+            <div class="feedback-form mg-md-left mg-xs-right">
+                <br />
+                <div class="radio-inline mg-md-left mg-xlg-right">
+                    <input type="radio" name="optradio" value="suggestion" data-bind="checked: type">Suggestion
+                </div>
+                <div class="radio-inline">
+                    <input type="radio" name="optradio" value="bug" data-bind="checked: type">Bug
+                </div>
+                <p><br />Feedback message:</p>
+                <textarea class="form-control valid" rows="3" data-bind="value: message"></textarea>
+                <div class="checkbox">
+                    <label><input type="checkbox" value="" data-bind="checked: anonymous">Anonymous</label>
+                </div>
+                <input type="button" value="Create" class="btn btn-default" data-bind="click: submit.bind($data)" />
+            </div>
+            <div class="row mg-md-up">
+                <div class="col-xs-6 col-xs-offset-3">
+                    <div id="feedbackCreate-ajax-response"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@Scripts.Render("~/bundles/Feedback")
+@Html.Partial("ViewModels/_CreateFeedbackViewModel")

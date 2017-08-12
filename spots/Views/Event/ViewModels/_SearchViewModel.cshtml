@@ -1,0 +1,131 @@
+﻿<script type="text/javascript">
+
+    var ViewModel = function() {
+
+        var self = this;
+
+        self.skip = ko.observable(0);
+        self.orderBy = ko.observable("time");
+
+        self.cityInput = ko.observable("@Model.City");
+        self.dateInput = ko.observable("@Model.Date");
+
+        self.cityNotify = ko.observable(true);
+        self.canLoadMore = ko.observable(false);
+
+        self.warningCount = ko.observable(0);
+
+        self.response = ko.observable("");
+
+        self.isRemoveable = function(observable) {
+            if (observable().length > 0) {
+                return true;
+            }
+
+            return false;
+        }
+
+        self.clearInput = function (observable) {
+            observable("");
+        }
+
+        self.sneakyUpdate = function (observableInput, observableNotify, value) {
+            observableNotify(false);
+            observableInput(value);
+            observableNotify(true);
+        }
+
+        self.incrementSkip = function (amount) {
+            self.skip(self.skip() + amount);
+        }
+
+        self.incrementWarningCount = function() {
+
+            var counter = self.warningCount();
+            self.warningCount(++counter);
+        }
+
+        self.LoadEvents = function() {
+
+            self.clearResponse();
+
+            var data = self.serialize();
+
+            GetEvents(function(response) {
+
+                self.canLoadMore(true);
+                self.response(response);
+            }, data);
+        }
+
+        self.LoadMoreEvents = function() {
+
+            self.incrementSkip(5);
+
+            if (self.canLoadMore() === false) {
+                return;
+            }
+
+            var data = self.serialize();
+
+            GetEvents(function (response) {
+
+                if ($(response).find(".text-warning").length > 0) {
+
+                    viewModel.incrementWarningCount();
+                }
+
+                if (viewModel.warningCount() <= 1) {
+
+                    self.response(self.response() + response);
+                }       
+            }, data);           
+        }
+
+        self.hasResponse = function() {
+
+            if (self.response().length > 0) {
+                return true;
+            }
+
+            return false;
+        }
+
+        self.clearResponse = function() {
+
+            self.skip(0);
+            self.warningCount(0);
+            self.canLoadMore(false);
+            self.response("");
+        }
+
+        self.serialize = function() {
+            var data = {};
+
+            data["City"] = self.cityInput();
+            data["Date"] = self.dateInput();
+            data["skip"] = self.skip();
+            data["orderBy"] = self.orderBy();
+
+            return data;
+        }
+    }
+
+    var viewModel = new ViewModel();
+
+    /*Subscribers*/
+    viewModel.cityInput.subscribe(function (value) {
+        if (viewModel.cityNotify()) {
+            GetCities(value);
+        }
+
+        viewModel.clearResponse();
+    });
+
+    viewModel.dateInput.subscribe(function (value) {
+
+        viewModel.clearResponse();
+    });
+
+    ko.applyBindings(viewModel);
+</script>

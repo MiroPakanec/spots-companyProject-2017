@@ -1,0 +1,93 @@
+﻿.pd-lg-up{ padding-top: 30px;}
+.pd-md-up{ padding-top: 20px;}
+.pd-sm-up{ padding-top: 10px;}
+.pd-lg-down{ padding-bottom: 30px;}
+.pd-md-down{ padding-bottom: 20px;}
+.pd-sm-down{ padding-bottom: 10px;}
+
+.pd-xs-left{ padding-left: 5px;}
+
+.pd-xs-right{ padding-right: 5px;}
+
+.mg-xlg-up{ margin-top: 70px;}
+.mg-lg-up{ margin-top: 50px;}
+.mg-md-up{ margin-top: 25px;}
+.mg-sm-up{ margin-top: 10px;}
+.mg-xs-up{ margin-top: 5px;}
+
+.mg-xlg-down{ margin-bottom: 70px;}
+.mg-lg-down{ margin-bottom: 50px;}
+.mg-md-down{ margin-bottom: 25px;}
+.mg-sm-down{ margin-bottom: 10px;}
+.mg-xs-down{ margin-bottom: 5px;}
+
+.mg-xlg-left{ margin-left: 70px;}
+.mg-lg-left{ margin-left: 50px;}
+.mg-md-left{ margin-left: 25px;}
+.mg-sm-left{ margin-left: 10px;}
+.mg-xs-left{ margin-left: 5px;}
+
+.mg-xlg-right{ margin-right: 70px;}
+.mg-lg-right{ margin-right: 50px;}
+.mg-md-right{ margin-right: 25px;}
+.mg-sm-right{ margin-right: 10px;}
+.mg-xs-right{ margin-right: 5px;}
+
+.mg-xs-left-percet{ margin-left: 5%; }
+.mg-sm-left-percet{ margin-left: 10%; }
+.mg-md-left-percet{ margin-left: 15%; }
+.mg-lg-left-percet{ margin-left: 20%; }
+
+.mg-xs-right-percet{ margin-right: 5%; }
+.mg-sm-right-percet{ margin-right: 10%; }
+.mg-md-right-percet{ margin-right: 15%; }
+.mg-lg-right-percet{ margin-right: 20%; }
+
+.pd-xs-right-percent{ padding-right: 5%; }
+.pd-sm-right-percent{ padding-right: 10%; }
+.pd-lg-right-percent{ padding-right: 150px; }
+
+/*position*/
+
+.bottomaligned {
+    position:absolute; bottom:0; left: 0;
+}
+
+/*Height*/
+.height-xs { height: 100px;}
+.height-sm { height: 200px;}
+.height-md { height: 400px;}
+.height-lg { height: 500px;}
+
+/*COLUMNS*/
+
+.no-side-padding {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.no-padding{ padding: 0; }
+.no-margin{ margin: 0; }
+
+/*SCROLL*/
+.scrollable {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.custom-dropdown {
+    position: absolute;
+    z-index: 1;
+}
+
+/*IMAGES*/
+.center-img {
+     display:block;
+     margin: auto;
+}
+
+.fit-img {
+    height: 100%; 
+    width: 100%;
+    object-fit: contain;
+}

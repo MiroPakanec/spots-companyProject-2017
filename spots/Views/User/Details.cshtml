@@ -1,0 +1,25 @@
+﻿@model spots.Models.User.Interfaces.ISpotUser
+
+@{
+    ViewBag.Title = Model.FirstName;
+    Layout = "~/Views/Shared/_InLayout.cshtml";
+}
+
+@Html.Partial("Details/Shared/_HeaderButtonsPartial")
+<hr class="border-standard-light"/>
+
+@Html.Partial("Details/Shared/_ContentPartial")
+
+@Html.Partial("ViewModels/_DetailsViewModel")
+
+@section Scripts {
+    @Scripts.Render("~/bundles/Group")
+}
+
+
+
+
+
+
+
+

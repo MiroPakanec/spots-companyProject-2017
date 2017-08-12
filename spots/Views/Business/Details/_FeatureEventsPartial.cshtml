@@ -1,0 +1,42 @@
+﻿@model IEnumerable<spots.Models.Business.ViewModels.BusinessFeatureEventViewModel>
+
+<div class="mg-sm-left">
+    <h2>Upcoming Events</h2>
+    @foreach (var item in Model)
+    {
+        <hr class="border-standard" />
+        <div class="row mg-sm-down">
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <img src="~/Content/images/img-empty-5.png" alt="Add Spot photo" class="center-img img-standard img-responsive"/>
+                    </div>
+                    <div class="col-xs-7 col-xs-offset-1">
+                        <h2>
+                            @Html.ActionLink(item.Title, "Details", "Event", new {id = item.MongoId}, new { @class = "tracked" })
+                        </h2>
+
+                        <div class="row mg-sm-up">
+                            <div class="col-xs-12">
+                                <span class="glyphicon glyphicon-user"> @item.Invited people are participating</span>
+                            </div>
+                            <div class="col-xs-12">
+                                <span class="glyphicon glyphicon-time"> @item.StartTime</span>
+                            </div>
+                            <div class="col-xs-12">
+                                <span class="glyphicon glyphicon-map-marker">  @Html.ActionLink(item.SpotName, "Details", "Spot", new {id = item.SpotId}, new { @class = "tracked" })</span>
+                            </div>
+                        </div>
+                        <hr class="border-standard"/>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                @item.FullAddress
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

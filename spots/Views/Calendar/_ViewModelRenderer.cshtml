@@ -1,0 +1,14 @@
+﻿@model string
+
+@{
+    switch (Model.ToLower().Trim())
+    {
+    case "global":
+        {
+            @Html.Partial("ViewModels/_CalendarViewModel")
+            break;
+        }
+    default:
+            break;
+    }
+}

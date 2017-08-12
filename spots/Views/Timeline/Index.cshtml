@@ -1,0 +1,14 @@
+﻿@model IEnumerable<spots.Modules.Timeline.Interfaces.ITimelineEvent>
+@{
+    Layout = "~/Views/Shared/_InLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-xs-12 text-center mg-lg-up mg-lg-down">
+        <h3>@ViewBag.Title</h3>
+        <hr class="border-standard-light" />
+    </div>
+</div>
+
+@Html.Partial("_TimelinePartial", ViewData["Type"])
+

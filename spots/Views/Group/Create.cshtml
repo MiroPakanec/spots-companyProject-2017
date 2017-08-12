@@ -1,0 +1,111 @@
+﻿@model spots.Models.Group.ViewModels.CreateGroupViewModel
+
+@{
+    Layout = "~/Views/Shared/_InLayout.cshtml";
+    ViewBag.Title = "Create group";
+}
+
+<div class="row">
+    <div class="col-sm-10 col-sm-push-1">
+        <div class="row mg-sm-up">
+            <div class="col-sm-12 col-sm-push-0">
+                <!--Title-->
+                <h2 class="text-center">@ViewBag.Title</h2>
+            </div>
+        </div>
+        <!--Form-->
+        @using (Html.BeginForm("Create", "Group", FormMethod.Post, new {id = "create-group-form"}))
+        {
+        <!--Token-->
+        @Html.AntiForgeryToken()
+
+        <div class="row mg-lg-up">
+            <div class="col-xs-10 col-xs-offset-1">
+                <div class="row">
+                    <div class="col-xs-12 col-xs-offset-0 col-md-8 col-md-offset-2">
+                        <div class="row">
+                            <p class="">Info</p>
+                            <hr class="border-standard-light" />
+                        </div>
+                        <!--Property-->
+                        <!--Name-->
+                        <div class="propery">
+                            <!--Property row-->
+                            <div class="row property-info pd-sm-down">
+                                <div class="col-xs-3 text-left">
+                                    <!--Property name -->
+                                    @Html.LabelFor(m => m.Name)
+                                </div>
+                                <div class="col-xs-6">
+                                    <!--Property value sent to controller-->
+                                    @Html.TextBoxFor(m => m.Name, new {@class = "form-control", type = "text", data_bind = "value:name, valueUpdate:'keyup'"})
+                                    @Html.ValidationMessageFor(m => m.Name, "", new {@class = "text-danger"})
+                                </div>
+                                <div class="col-xs-1">
+                                    <!--Remove button-->
+                                    <button type="button" class="btn btn-sm btn-remove" data-bind="visible: isRemoveable(name), click: clearInput.bind($data, viewModel.name)">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Property End-->
+
+                        <!--Property-->
+                        <!--Description-->
+                        <div class="propery">
+                            <!--Property row-->
+                            <div class="row property-info pd-sm-down">
+                                <div class="col-xs-3 text-left">
+                                    <!--Property name -->
+                                    @Html.LabelFor(m => m.Description)
+                                </div>
+                                <div class="col-xs-6">
+                                    <!--Property value sent to controller-->
+                                    @Html.TextAreaFor(m => m.Description, new {@class = "form-control", type = "text", rows = "6", data_bind = "value:description, valueUpdate:'keyup'"})
+                                    @Html.ValidationMessageFor(m => m.Description, "", new {@class = "text-danger"})
+                                </div>
+                                <div class="col-xs-1">
+                                    <!--Remove button-->
+                                    <button type="button" class="btn btn-sm btn-remove" data-bind="visible: isRemoveable(description), click: clearInput.bind($data, viewModel.description)">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Property End-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+        
+        @Html.Partial("Create/_GroupMembersPartial", @Model)
+        
+        <div id="create-group-response" class="mg-sm-up"></div>
+        <div class="row mg-lg-up mg-lg-down">
+            <div class="col-xs-2 col-xs-offset-5">
+                <!--submit button-->
+                <button type="button" class="btn btn-block btn-md btn-default" data-bind="click: submit.bind($data)">
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"> Create</span>
+                </button>
+            </div>
+            <div class="col-xs-2">
+                <!--Remove button-->
+                <button type="button" class="btn btn-block btn-md btn-default" data-bind="click: removeAll.bind($data)">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"> Remove all</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/Group")
+    @Scripts.Render("~/bundles/jqueryval")
+
+    @Styles.Render("~/bundles/cssval")
+}
+
+
+

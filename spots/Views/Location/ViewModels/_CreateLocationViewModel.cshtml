@@ -1,0 +1,95 @@
+﻿<script type="text/javascript">
+    $(function(){
+
+      $(".dropdown-menu li a").click(function(){
+
+          $("#dropdown-selected").text($(this).text());
+      });
+
+    });
+
+
+    var ViewModel = function() {
+
+        var self = this;
+
+        self.address = ko.observable("@Model.Address");
+        self.locationName = ko.observable("");
+        self.city = ko.observable("");
+        self.zip = ko.observable("");
+        self.country = ko.observable("");
+
+        self.businessId = ko.observable("");
+
+        self.isRemoveable = function (observable) {
+            console.log(observable());
+            if (observable().length > 0) {
+                return true;
+            }
+
+            return false;
+        }
+
+        self.remove = function(observable) {
+            observable("");
+        }
+
+        $("#createLocationForm")
+    .submit(
+        function () {
+            if ($(this).valid()) {
+                AjaxCall(this.action, this.method, $(this).serialize(), null, createLocationResponse, "#locationCreate-ajax-response");
+            }
+            return false;
+        });
+
+        self.clearAllInputs = function () {
+            self.address("");
+            self.locationName("");
+            self.city("");
+            self.zip("");
+            self.country("");
+            $("#createLocationForm").valid();
+        }
+
+        self.submit = function () {
+            if ($("#createLocationForm").valid()===false) {
+                return;
+            } 
+            
+            if (self.isBusinessValid() == false) return;
+            var data = self.serialize();
+
+            SubmitLocation(function (response, target) {
+                $(target).html(response);
+            }, data);
+        }
+
+        self.isBusinessValid = function () {
+            if (self.businessId().length <= 0) {
+                $('#errorMessageBusiness').show();
+                return false;
+            }
+
+            $('#errorMessageBusiness').hide();
+            return true;
+        }
+
+        self.serialize = function () {
+            var data = {};
+            data["Address"] = self.address();
+            data["BusinessId"] = self.businessId();
+            data["LocationName"] = self.locationName();
+            data["Country"] = self.country();
+            data["City"] = self.city();
+            data["Zip"] = self.zip();
+
+            return data;
+        }
+
+    }
+
+    var viewModel = new ViewModel();
+    ko.applyBindings(viewModel);
+
+</script>

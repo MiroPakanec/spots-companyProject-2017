@@ -1,0 +1,938 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4A05C100-D589-4E4B-B69A-DE14F95FDA67}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>spots</RootNamespace>
+    <AssemblyName>spots</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort>44371</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Mvc.4.0.1\lib\net45\Microsoft.Practices.Unity.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="MongoDB.Bson, Version=2.3.0.157, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Bson.2.3.0\lib\net45\MongoDB.Bson.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MongoDB.Driver, Version=2.3.0.157, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Driver.2.3.0\lib\net45\MongoDB.Driver.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MongoDB.Driver.Core, Version=2.3.0.157, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Driver.Core.2.3.0\lib\net45\MongoDB.Driver.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Moq, Version=4.0.10827.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.Contrib.0.3\lib\Moq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Moq.Contrib, Version=0.1.3802.36788, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.Contrib.0.3\lib\Moq.Contrib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\Bundles\BundleConfig.cs" />
+    <Compile Include="App_Start\Bundles\BundleFactory.cs" />
+    <Compile Include="App_Start\Bundles\FeedbackBundle.cs" />
+    <Compile Include="App_Start\Bundles\GroupBundle.cs" />
+    <Compile Include="App_Start\Bundles\BusinessBundle.cs" />
+    <Compile Include="App_Start\Bundles\CalendarBundle.cs" />
+    <Compile Include="App_Start\Bundles\EventBundle.cs" />
+    <Compile Include="App_Start\Bundles\MapBundle.cs" />
+    <Compile Include="App_Start\Bundles\TimelineBundle.cs" />
+    <Compile Include="App_Start\Bundles\UserBundle.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="BL\Core\BusinessCore.cs" />
+    <Compile Include="BL\Core\EventCore.cs" />
+    <Compile Include="BL\Core\Helpers\GoogleAPI.cs" />
+    <Compile Include="BL\Core\Helpers\TimeSlot.cs" />
+    <Compile Include="BL\Core\Interfaces\IBusinessCore.cs" />
+    <Compile Include="BL\Core\Interfaces\IEventCore.cs" />
+    <Compile Include="BL\Core\Interfaces\ILocationCore.cs" />
+    <Compile Include="BL\Core\Interfaces\IMapCore.cs" />
+    <Compile Include="BL\Core\Interfaces\ISpotCore.cs" />
+    <Compile Include="BL\Core\LocationCore.cs" />
+    <Compile Include="BL\Core\MapCore.cs" />
+    <Compile Include="BL\Core\SpotCore.cs" />
+    <Compile Include="BL\Facades\AccountFacade.cs" />
+    <Compile Include="BL\Facades\BusinessFacade.cs" />
+    <Compile Include="BL\Facades\CalendarFacade.cs" />
+    <Compile Include="BL\Facades\EventFacade.cs" />
+    <Compile Include="BL\Facades\ExceptionLogFacade.cs" />
+    <Compile Include="BL\Facades\FeedbackFacade.cs" />
+    <Compile Include="BL\Facades\GroupFacade.cs" />
+    <Compile Include="BL\Facades\Interfaces\IAccountFacade.cs" />
+    <Compile Include="BL\Facades\Interfaces\IBusinessFacade.cs" />
+    <Compile Include="BL\Facades\Interfaces\ICalendarFacade.cs" />
+    <Compile Include="BL\Facades\Interfaces\IEventFacade.cs" />
+    <Compile Include="BL\Facades\Interfaces\IExceptionLogFacade.cs" />
+    <Compile Include="BL\Facades\Interfaces\IFeedbackFacade.cs" />
+    <Compile Include="BL\Facades\Interfaces\IGroupFacade.cs" />
+    <Compile Include="BL\Facades\Interfaces\ILocationFacade.cs" />
+    <Compile Include="BL\Facades\Interfaces\ILogFacade.cs" />
+    <Compile Include="BL\Facades\Interfaces\IMapFacade.cs" />
+    <Compile Include="BL\Facades\Interfaces\ISpotFacade.cs" />
+    <Compile Include="BL\Facades\Interfaces\IUserFacade.cs" />
+    <Compile Include="BL\Facades\LocationFacade.cs" />
+    <Compile Include="BL\Facades\LogFacade.cs" />
+    <Compile Include="BL\Facades\MapFacade.cs" />
+    <Compile Include="BL\Facades\SpotFacade.cs" />
+    <Compile Include="BL\Facades\UserFacade.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BusinessController.cs" />
+    <Compile Include="Controllers\CalendarController.cs" />
+    <Compile Include="Controllers\EventController.cs" />
+    <Compile Include="Controllers\FeedbackController.cs" />
+    <Compile Include="Controllers\GroupController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LocationController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MapController.cs" />
+    <Compile Include="Controllers\SpotController.cs" />
+    <Compile Include="Controllers\TimelineController.cs" />
+    <Compile Include="Controllers\TrackController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="DAL\Mongo\Collections\BusinessCollections.cs" />
+    <Compile Include="DAL\Mongo\Collections\GroupCollections.cs" />
+    <Compile Include="DAL\Mongo\Collections\LocationCollections.cs" />
+    <Compile Include="DAL\Mongo\Collections\SpotUserCollections.cs" />
+    <Compile Include="DAL\Mongo\Context\Interfaces\IMongoContextGeneric.cs" />
+    <Compile Include="DAL\Mongo\Context\MongoContextGeneric.cs" />
+    <Compile Include="DAL\Mongo\Context\Interfaces\IMongoContext.cs" />
+    <Compile Include="DAL\Mongo\Context\MongoContext.cs" />
+    <Compile Include="DAL\Mongo\Collections\MongoCollections.cs" />
+    <Compile Include="DAL\Mongo\Context\MongoDatabase.cs" />
+    <Compile Include="DAL\Mongo\MongoDatabases.cs" />
+    <Compile Include="DAL\Queries\AtomicWork\AtomicWork.cs" />
+    <Compile Include="DAL\Queries\AtomicWork\Business\AtomicBusinessWork.cs" />
+    <Compile Include="DAL\Queries\AtomicWork\Business\IAtomicBusinessWork.cs" />
+    <Compile Include="DAL\Queries\AtomicWork\Event\AtomicEventWork.cs" />
+    <Compile Include="DAL\Queries\AtomicWork\Event\IAtomicEventWork.cs" />
+    <Compile Include="DAL\Queries\AtomicWork\Group\AtomicGroupWork.cs" />
+    <Compile Include="DAL\Queries\AtomicWork\Group\IAtomicGroupWork.cs" />
+    <Compile Include="DAL\Queries\AtomicWork\IAtomicWork.cs" />
+    <Compile Include="DAL\Queries\AtomicWork\Location\AtomicLocationWork.cs" />
+    <Compile Include="DAL\Queries\AtomicWork\Location\IAtomicLocationWork.cs" />
+    <Compile Include="DAL\Queries\AtomicWork\Modules\Timeline\AtomicTimelineWork.cs" />
+    <Compile Include="DAL\Queries\AtomicWork\Modules\Timeline\IAtomicTimelineWork.cs" />
+    <Compile Include="DAL\Queries\AtomicWork\Spot\AtomicSpotWork.cs" />
+    <Compile Include="DAL\Queries\AtomicWork\Spot\IAtomicSpotWork.cs" />
+    <Compile Include="DAL\Queries\AtomicWork\User\AtomicUserWork.cs" />
+    <Compile Include="DAL\Queries\AtomicWork\User\IAtomicUserWork.cs" />
+    <Compile Include="DAL\Queries\Repositories\Business\BusinessRepository.cs" />
+    <Compile Include="DAL\Queries\Repositories\Business\IBusinessRepository.cs" />
+    <Compile Include="DAL\Queries\Repositories\Core\IRepository.cs" />
+    <Compile Include="DAL\Queries\Repositories\Core\Repository.cs" />
+    <Compile Include="DAL\Queries\Repositories\Event\EventRepository.cs" />
+    <Compile Include="DAL\Queries\Repositories\Event\IEventRepository.cs" />
+    <Compile Include="DAL\Queries\Repositories\Feedback\FeedbackRepository.cs" />
+    <Compile Include="DAL\Queries\Repositories\Feedback\IFeedbackRepository.cs" />
+    <Compile Include="DAL\Queries\Repositories\Group\GroupRepository.cs" />
+    <Compile Include="DAL\Queries\Repositories\Group\IGroupRepository.cs" />
+    <Compile Include="DAL\Queries\Repositories\Location\ILocationRepository.cs" />
+    <Compile Include="DAL\Queries\Repositories\Location\LocationRepository.cs" />
+    <Compile Include="DAL\Queries\Repositories\Log\ExceptionLogRepository.cs" />
+    <Compile Include="DAL\Queries\Repositories\Log\IExceptionLogRepository.cs" />
+    <Compile Include="DAL\Queries\Repositories\Log\ILogRepository.cs" />
+    <Compile Include="DAL\Queries\Repositories\Log\LogRepository.cs" />
+    <Compile Include="DAL\Queries\Repositories\SpotUser\ISpotUserRepository.cs" />
+    <Compile Include="DAL\Queries\Repositories\SpotUser\SpotUserRepository.cs" />
+    <Compile Include="DAL\Queries\Repositories\Spot\ISpotRepository.cs" />
+    <Compile Include="DAL\Queries\Repositories\Spot\SpotRepository.cs" />
+    <Compile Include="DAL\SQLS\ApplicationDbContext.cs" />
+    <Compile Include="DAL\SQLS\Databases.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Authorisation\Actions\GroupActions.cs" />
+    <Compile Include="Models\Authorisation\Actions\ViewModels\GroupActionViewModel.cs" />
+    <Compile Include="Models\Authorisation\Actions\Interfaces\IGroupActions.cs" />
+    <Compile Include="Models\Authorisation\Roles\GroupRole.cs" />
+    <Compile Include="Models\Authorisation\Roles\GroupRoles.cs" />
+    <Compile Include="Models\Authorisation\Roles\Interfaces\IGroupRole.cs" />
+    <Compile Include="Models\Business\ViewModels\BusinessDetailsViewModel.cs" />
+    <Compile Include="Models\Business\ViewModels\BusinessFeatureEventViewModel.cs" />
+    <Compile Include="Models\Event\ViewModels\CommonFreeTimesViewModel.cs" />
+    <Compile Include="Models\Event\ViewModels\CreateEventTimeSlotsViewModel.cs" />
+    <Compile Include="Models\Event\ViewModels\SearchEventsViewModel.cs" />
+    <Compile Include="Models\Feedback\Feedback.cs" />
+    <Compile Include="Models\Feedback\FeedbackResponse.cs" />
+    <Compile Include="Models\Feedback\Interfaces\IFeedback.cs" />
+    <Compile Include="Models\Feedback\Interfaces\IFeedbackResponse.cs" />
+    <Compile Include="Models\Feedback\ViewModels\CreateFeedbackModelView.cs" />
+    <Compile Include="Models\Group\Group.cs" />
+    <Compile Include="Models\Group\GroupResponse.cs" />
+    <Compile Include="Models\Group\Interfaces\IGroup.cs" />
+    <Compile Include="Models\Group\Interfaces\IGroupResponse.cs" />
+    <Compile Include="Models\Group\ViewModels\CreateGroupViewModel.cs" />
+    <Compile Include="Models\Group\ViewModels\GroupDetailsViewModel.cs" />
+    <Compile Include="Models\Group\ViewModels\GroupInformationDetailsViewModel.cs" />
+    <Compile Include="Models\Location\Interfaces\ILocationResponse.cs" />
+    <Compile Include="Models\Location\LocationBusiness.cs" />
+    <Compile Include="Models\Location\LocationResponse.cs" />
+    <Compile Include="Models\Location\ViewModels\CreateLocationViewModel.cs" />
+    <Compile Include="Models\Log\ExceptionLog.cs" />
+    <Compile Include="Models\Log\IExceptionLog.cs" />
+    <Compile Include="Models\Response\Response.cs" />
+    <Compile Include="Models\Log\Log.cs" />
+    <Compile Include="Models\Log\ILog.cs" />
+    <Compile Include="Models\Shared\TimeInterval.cs" />
+    <Compile Include="Models\Shared\TimeIntervalValidation.cs" />
+    <Compile Include="Models\Spot\Interfaces\ISpotResponse.cs" />
+    <Compile Include="Models\Spot\Interfaces\SpotResponse.cs" />
+    <Compile Include="Models\Spot\ViewModels\AvailableHoursTimeIntervalViewModel.cs" />
+    <Compile Include="Models\Spot\ViewModels\CreateSpotViewModel.cs" />
+    <Compile Include="Models\Tools\ModelBinders\ObjectIdModelBinder.cs" />
+    <Compile Include="Models\Account\AccountTypes.cs" />
+    <Compile Include="Models\Account\Viewmodels\Extentions\AccountViewModelExtensions.cs" />
+    <Compile Include="Models\Account\Viewmodels\AccountViewModel.cs" />
+    <Compile Include="Models\Account\Interfaces\IRegister.cs" />
+    <Compile Include="Models\Account\Viewmodels\DeleteViewModel.cs" />
+    <Compile Include="Models\Account\Interfaces\IAccount.cs" />
+    <Compile Include="Models\Account\Interfaces\IDelete.cs" />
+    <Compile Include="Models\Account\Interfaces\ILogin.cs" />
+    <Compile Include="Models\Account\Viewmodels\Extentions\LoginViewModelExtensions.cs" />
+    <Compile Include="Models\Account\Viewmodels\ExternalLoginConfirmationViewModel.cs" />
+    <Compile Include="Models\Account\Viewmodels\ExternalLoginListViewModel.cs" />
+    <Compile Include="Models\Account\Viewmodels\ForgotPasswordViewModel.cs" />
+    <Compile Include="Models\Account\Viewmodels\ForgotViewModel.cs" />
+    <Compile Include="Models\Account\Viewmodels\LoginViewModel.cs" />
+    <Compile Include="Models\Account\Viewmodels\RegisterViewModel.cs" />
+    <Compile Include="Models\Account\Viewmodels\ResetPasswordViewModel.cs" />
+    <Compile Include="Models\Account\Viewmodels\SendCodeViewModel.cs" />
+    <Compile Include="Models\Account\Viewmodels\VerifyCodeViewModel.cs" />
+    <Compile Include="Models\Business\Business.cs" />
+    <Compile Include="Models\Business\BusinessHeadquaters.cs" />
+    <Compile Include="Models\Business\Interfaces\IBusinessHeadquaters.cs" />
+    <Compile Include="Models\Business\ViewModels\CreateBusinessViewModel.cs" />
+    <Compile Include="Models\Business\Extensions\BusinessExtensions.cs" />
+    <Compile Include="Models\Business\BusinessResponse.cs" />
+    <Compile Include="Models\Business\Interfaces\IBusiness.cs" />
+    <Compile Include="Models\Business\Interfaces\IBusinessResponse.cs" />
+    <Compile Include="Models\Business\Interfaces\ICreateBusiness.cs" />
+    <Compile Include="Models\Email\EmailHandler.cs" />
+    <Compile Include="Models\Email\IEmailHandler.cs" />
+    <Compile Include="Models\Email\Templates\Default\DefaultTemplate.cs" />
+    <Compile Include="Models\Email\Templates\Default\IDefaultTemplate.cs" />
+    <Compile Include="Models\Email\Templates\ITemplate.cs" />
+    <Compile Include="Models\Email\Templates\Templatecs.cs" />
+    <Compile Include="Models\Event\Event.cs" />
+    <Compile Include="Models\Event\EventResponse.cs" />
+    <Compile Include="Models\Event\Interfaces\IEvent.cs" />
+    <Compile Include="Models\Event\Interfaces\IEventDetails.cs" />
+    <Compile Include="Models\Event\Interfaces\IEventResponse.cs" />
+    <Compile Include="Models\Spot\Interfaces\IAvailableSpot.cs" />
+    <Compile Include="Models\Spot\ViewModels\AvailableSpotsViewModel.cs" />
+    <Compile Include="Models\Event\ViewModels\CreateEventViewModel.cs" />
+    <Compile Include="Models\Event\ViewModels\EventDetailsViewModel.cs" />
+    <Compile Include="Models\Identity\IdentityModel.cs" />
+    <Compile Include="Models\Location\Interfaces\ILocation.cs" />
+    <Compile Include="Models\Location\Location.cs" />
+    <Compile Include="Models\Manage\ManageViewModels.cs" />
+    <Compile Include="Models\Response\Interfaces\IResponse.cs" />
+    <Compile Include="Models\Spot\Interfaces\ISpot.cs" />
+    <Compile Include="Models\Spot\Spot.cs" />
+    <Compile Include="Models\User\Extensions\UserExtensions.cs" />
+    <Compile Include="Models\User\Interfaces\ISpotUser.cs" />
+    <Compile Include="Models\User\Interfaces\IUserBusiness.cs" />
+    <Compile Include="Models\User\Interfaces\IUserEvent.cs" />
+    <Compile Include="Models\User\Interfaces\IUserGroup.cs" />
+    <Compile Include="Models\User\Interfaces\IUserResponse.cs" />
+    <Compile Include="Models\User\UserBusiness.cs" />
+    <Compile Include="Models\User\SpotUser.cs" />
+    <Compile Include="Models\User\UserEvent.cs" />
+    <Compile Include="Models\User\UserGroup.cs" />
+    <Compile Include="Models\User\UserResponse.cs" />
+    <Compile Include="Models\User\ViewModels\UserBusinessNameListViewModel.cs" />
+    <Compile Include="Models\User\ViewModels\UserContactViewModel.cs" />
+    <Compile Include="Models\User\ViewModels\UserCreateEventViewModel.cs" />
+    <Compile Include="Models\User\ViewModels\UserDetailsViewModel.cs" />
+    <Compile Include="Models\User\ViewModels\UserGroupNameListViewModel.cs" />
+    <Compile Include="Models\User\ViewModels\UserPersonalViewModel.cs" />
+    <Compile Include="Modules\Calendar\DayUnit.cs" />
+    <Compile Include="Modules\Calendar\Interfaces\IDayUnit.cs" />
+    <Compile Include="Modules\Calendar\ViewModels\CalendarEventViewModel.cs" />
+    <Compile Include="Modules\Calendar\ViewModels\CalendarFeatureEventViewModel.cs" />
+    <Compile Include="Modules\Calendar\ViewModels\CalendarViewModel.cs" />
+    <Compile Include="Modules\Map\Models\MapDetailsViewModel.cs" />
+    <Compile Include="Modules\Map\Models\MapFilter.cs" />
+    <Compile Include="Modules\Map\Models\MapLocation.cs" />
+    <Compile Include="Modules\Timeline\Interfaces\ITimeline.cs" />
+    <Compile Include="Modules\Timeline\Interfaces\ITimelineEvent.cs" />
+    <Compile Include="Modules\Timeline\Timeline.cs" />
+    <Compile Include="Modules\Timeline\TimelineTypes.cs" />
+    <Compile Include="Modules\Timeline\ViewModels\TimelineEventViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Calendar\CalendarHelper.cs" />
+    <Compile Include="Services\DateService\DateService.cs" />
+    <Compile Include="Services\DateService\DateTimeExtensions.cs" />
+    <Compile Include="Services\DateService\WeekDays.cs" />
+    <Compile Include="Services\EmailService\EmailService.cs" />
+    <Compile Include="Services\EmailService\Extensions\MailMessageExtensions.cs" />
+    <Compile Include="Services\EmailService\Interfaces\IEmailService.cs" />
+    <Compile Include="Services\EmailService\Interfaces\ITemplate.cs" />
+    <Compile Include="Services\EmailService\Template.cs" />
+    <Compile Include="Services\Requests\Get.cs" />
+    <Compile Include="Services\Requests\Request.cs" />
+    <Compile Include="Services\Routing\EscapeHelper.cs" />
+    <Compile Include="Services\Serializer\Serializer.cs" />
+    <Compile Include="Services\ViewServices\RedirectTo.cs" />
+    <Compile Include="Services\ViewServices\ViewDataAttributes.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\aspnet-Dbconnection-20170307053060.mdf" />
+    <Content Include="App_Data\aspnet-Dbconnection-20170307053060_log.ldf">
+      <DependentUpon>aspnet-Dbconnection-20170307053060.mdf</DependentUpon>
+    </Content>
+    <Content Include="Content\bootstrap-datetimepicker.css" />
+    <Content Include="Content\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Business\layout.css" />
+    <Content Include="Content\Calendar\layout.css" />
+    <Content Include="Content\designTools.css" />
+    <Content Include="Content\Group\layout.css" />
+    <Content Include="Content\images\img-empty-7.png" />
+    <Content Include="Content\images\img-empty-6.png" />
+    <Content Include="Content\images\img-empty-5.png" />
+    <Content Include="Content\Spot\layout.css" />
+    <Content Include="Content\validation.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\images\img-empty-1.png" />
+    <Content Include="Content\images\img-empty-2.png" />
+    <Content Include="Content\images\img-empty-3.png" />
+    <Content Include="Content\images\img-empty-4.png" />
+    <Content Include="Content\images\No_Image_Available.png" />
+    <Content Include="Content\layoutTools.css" />
+    <Content Include="Content\navbar.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\readme.txt" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\Account\events.js" />
+    <Content Include="Scripts\Account\toggleAnim.js" />
+    <Content Include="Scripts\Account\viewmodels.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\bootstrap\wells.less" />
+    <Content Include="Content\bootstrap\variables.less" />
+    <Content Include="Content\bootstrap\utilities.less" />
+    <Content Include="Content\bootstrap\type.less" />
+    <Content Include="Content\bootstrap\tooltip.less" />
+    <Content Include="Content\bootstrap\thumbnails.less" />
+    <Content Include="Content\bootstrap\theme.less" />
+    <Content Include="Content\bootstrap\tables.less" />
+    <Content Include="Content\bootstrap\scaffolding.less" />
+    <Content Include="Content\bootstrap\responsive-utilities.less" />
+    <Content Include="Content\bootstrap\responsive-embed.less" />
+    <Content Include="Content\bootstrap\progress-bars.less" />
+    <Content Include="Content\bootstrap\print.less" />
+    <Content Include="Content\bootstrap\popovers.less" />
+    <Content Include="Content\bootstrap\panels.less" />
+    <Content Include="Content\bootstrap\pagination.less" />
+    <Content Include="Content\bootstrap\pager.less" />
+    <Content Include="Content\bootstrap\normalize.less" />
+    <Content Include="Content\bootstrap\navs.less" />
+    <Content Include="Content\bootstrap\navbar.less" />
+    <Content Include="Content\bootstrap\modals.less" />
+    <Content Include="Content\bootstrap\mixins\vendor-prefixes.less" />
+    <Content Include="Content\bootstrap\mixins\text-overflow.less" />
+    <Content Include="Content\bootstrap\mixins\text-emphasis.less" />
+    <Content Include="Content\bootstrap\mixins\table-row.less" />
+    <Content Include="Content\bootstrap\mixins\tab-focus.less" />
+    <Content Include="Content\bootstrap\mixins\size.less" />
+    <Content Include="Content\bootstrap\mixins\responsive-visibility.less" />
+    <Content Include="Content\bootstrap\mixins\resize.less" />
+    <Content Include="Content\bootstrap\mixins\reset-text.less" />
+    <Content Include="Content\bootstrap\mixins\reset-filter.less" />
+    <Content Include="Content\bootstrap\mixins\progress-bar.less" />
+    <Content Include="Content\bootstrap\mixins\panels.less" />
+    <Content Include="Content\bootstrap\mixins\pagination.less" />
+    <Content Include="Content\bootstrap\mixins\opacity.less" />
+    <Content Include="Content\bootstrap\mixins\nav-vertical-align.less" />
+    <Content Include="Content\bootstrap\mixins\nav-divider.less" />
+    <Content Include="Content\bootstrap\mixins\list-group.less" />
+    <Content Include="Content\bootstrap\mixins\labels.less" />
+    <Content Include="Content\bootstrap\mixins\image.less" />
+    <Content Include="Content\bootstrap\mixins\hide-text.less" />
+    <Content Include="Content\bootstrap\mixins\grid.less" />
+    <Content Include="Content\bootstrap\mixins\grid-framework.less" />
+    <Content Include="Content\bootstrap\mixins\gradients.less" />
+    <Content Include="Content\bootstrap\mixins\forms.less" />
+    <Content Include="Content\bootstrap\mixins\clearfix.less" />
+    <Content Include="Content\bootstrap\mixins\center-block.less" />
+    <Content Include="Content\bootstrap\mixins\buttons.less" />
+    <Content Include="Content\bootstrap\mixins\border-radius.less" />
+    <Content Include="Content\bootstrap\mixins\background-variant.less" />
+    <Content Include="Content\bootstrap\mixins\alerts.less" />
+    <Content Include="Content\bootstrap\mixins.less" />
+    <Content Include="Content\bootstrap\media.less" />
+    <Content Include="Content\bootstrap\list-group.less" />
+    <Content Include="Content\bootstrap\labels.less" />
+    <Content Include="Content\bootstrap\jumbotron.less" />
+    <Content Include="Content\bootstrap\input-groups.less" />
+    <Content Include="Content\bootstrap\grid.less" />
+    <Content Include="Content\bootstrap\glyphicons.less" />
+    <Content Include="Content\bootstrap\forms.less" />
+    <Content Include="Content\bootstrap\dropdowns.less" />
+    <Content Include="Content\bootstrap\component-animations.less" />
+    <Content Include="Content\bootstrap\code.less" />
+    <Content Include="Content\bootstrap\close.less" />
+    <Content Include="Content\bootstrap\carousel.less" />
+    <Content Include="Content\bootstrap\buttons.less" />
+    <Content Include="Content\bootstrap\button-groups.less" />
+    <Content Include="Content\bootstrap\breadcrumbs.less" />
+    <Content Include="Content\bootstrap\bootstrap.less" />
+    <Content Include="Content\bootstrap\badges.less" />
+    <Content Include="Content\bootstrap\alerts.less" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="ClassDiagram1.cd" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Business\createBusinessEvents.js" />
+    <Content Include="Scripts\Business\Details\requests.js" />
+    <Content Include="Scripts\Business\searchBoxEvents.js" />
+    <Content Include="Scripts\Calendar\Communication\requests.js" />
+    <Content Include="Scripts\Calendar\Communication\responses.js" />
+    <Content Include="Scripts\Calendar\functions.js" />
+    <Content Include="Scripts\Calendar\load.js" />
+    <Content Include="Scripts\Event\Create\availableSpotsEvents.js" />
+    <Content Include="Scripts\Event\Create\functions.js" />
+    <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
+    <Content Include="Scripts\Event\Create\People\functions.js" />
+    <Content Include="Scripts\Event\Create\People\load.js" />
+    <Content Include="Scripts\Event\Create\Shared\functions.js" />
+    <Content Include="Scripts\Event\Create\TimeCity\functions.js" />
+    <Content Include="Scripts\Event\Search\autoEventLoad.js" />
+    <Content Include="Scripts\Event\Search\events.js" />
+    <Content Include="Scripts\Event\Search\functions.js" />
+    <Content Include="Scripts\Feedback\requests.js" />
+    <Content Include="Scripts\Group\AddMember\events.js" />
+    <Content Include="Scripts\Group\AddMember\functions.js" />
+    <Content Include="Scripts\Group\communication.js" />
+    <Content Include="Scripts\Group\events.js" />
+    <Content Include="Scripts\Group\functions.js" />
+    <Content Include="Scripts\jquery-3.0.0.min.map" />
+    <Content Include="Scripts\jquery-3.0.0.slim.min.map" />
+    <None Include="Scripts\jquery-3.1.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-3.0.0.js" />
+    <Content Include="Scripts\jquery-3.0.0.min.js" />
+    <Content Include="Scripts\jquery-3.0.0.slim.js" />
+    <Content Include="Scripts\jquery-3.0.0.slim.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
+    <Content Include="Scripts\jquery-migrate-3.0.0.js" />
+    <Content Include="Scripts\jquery-migrate-3.0.0.min.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\knockout-3.4.0.debug.js" />
+    <Content Include="Scripts\knockout-3.4.0.js" />
+    <Content Include="Scripts\knockout.mapping-latest.debug.js" />
+    <Content Include="Scripts\knockout.mapping-latest.js" />
+    <None Include="Scripts\linq-vsdoc.js" />
+    <Content Include="Scripts\linq.js" />
+    <Content Include="Scripts\linq.min.js" />
+    <Content Include="Scripts\Location\createLocationEvents.js" />
+    <Content Include="Scripts\Logout\logout.js" />
+    <Content Include="Scripts\Map\mapconfig.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\ProfileDetails\communication.js" />
+    <Content Include="Scripts\ProfileDetails\Contact\communication.js" />
+    <Content Include="Scripts\ProfileDetails\Contact\events.js" />
+    <Content Include="Scripts\ProfileDetails\Personal\communication.js" />
+    <Content Include="Scripts\ProfileDetails\Personal\events.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\SharedLoad\featuresLoad.js" />
+    <Content Include="Scripts\Spot\availableHours.js" />
+    <Content Include="Scripts\Spot\Communication\requests.js" />
+    <Content Include="Scripts\Spot\createSpotEvents.js" />
+    <Content Include="Scripts\Spot\events.js" />
+    <Content Include="Scripts\Spot\Tools\availableSpotsTools.js" />
+    <Content Include="Scripts\Spot\validation.js" />
+    <Content Include="Scripts\Timeline\autoEventLoad.js" />
+    <Content Include="Scripts\Timeline\Communication\requests.js" />
+    <Content Include="Scripts\Timeline\load.js" />
+    <Content Include="Scripts\Timeline\Communication\responses.js" />
+    <Content Include="Scripts\Tools\Communication\ajax.js" />
+    <Content Include="Scripts\Tools\Communication\formTools.js" />
+    <Content Include="Scripts\Tools\Config\config.js" />
+    <Content Include="Scripts\Tools\Config\datetime.js" />
+    <Content Include="Scripts\Tools\Helpers\dateHelper.js" />
+    <Content Include="Scripts\Tools\Helpers\knockoutHelper.js" />
+    <Content Include="Scripts\Tools\Tracking\events.js" />
+    <Content Include="Scripts\User\DeleteProfile\functions.js" />
+    <Content Include="Scripts\User\events.js" />
+    <Content Include="Scripts\User\peopleInviteEvents.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\_RegisterPartial.cshtml" />
+    <Content Include="Views\Account\_LoginAccountPartial.cshtml" />
+    <Content Include="Views\Account\RegisterConfirm.cshtml" />
+    <Content Include="Views\Shared\_InLayout.cshtml" />
+    <Content Include="Views\Shared\_NavbarPartial.cshtml" />
+    <Content Include="Views\User\Details.cshtml" />
+    <Content Include="Views\Shared\_FooterPartial.cshtml" />
+    <Content Include="Views\Shared\_FeaturesPartial.cshtml" />
+    <Content Include="Views\User\Details\Personal\_PersonalDetailsPartial.cshtml" />
+    <Content Include="Views\User\Details\Business\_BusinessDetailsPartial.cshtml" />
+    <Content Include="Views\User\Details\Personal\_DeleteProfilePartial.cshtml" />
+    <Content Include="Views\User\_ResponsePartial.cshtml" />
+    <Content Include="Views\User\DeleteProfile\DeleteProfileConfirm.cshtml" />
+    <Content Include="Views\User\DeleteProfile\DeleteProfileFailure.cshtml" />
+    <Content Include="Views\User\DeleteProfile\DeleteProfileSuccess.cshtml" />
+    <Content Include="Views\Business\Create.cshtml" />
+    <Content Include="Views\Business\GetUsersSearchBox.cshtml" />
+    <Content Include="Views\Business\_CreateResponsePartial.cshtml" />
+    <Content Include="Views\Shared\_FeatureBusinessPartial.cshtml" />
+    <Content Include="Views\Business\Details.cshtml" />
+    <Content Include="Views\Spot\Create.cshtml" />
+    <Content Include="Views\Location\Details.cshtml" />
+    <Content Include="Views\Location\Create.cshtml" />
+    <Content Include="Views\Spot\Details.cshtml" />
+    <Content Include="Views\Event\GetAvailableSpots.cshtml" />
+    <Content Include="Views\Event\_CreateViewModel.cshtml" />
+    <Content Include="Views\Location\_GetCitiesSearchBox.cshtml" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.1.1.min.map" />
+    <Content Include="Views\Event\_AvailableSpots.cshtml" />
+    <Content Include="Views\Event\_SpotsNotAvailable.cshtml" />
+    <Content Include="Views\User\_InvitePeople.cshtml" />
+    <Content Include="Views\Event\_EventResponse.cshtml" />
+    <Content Include="Views\Timeline\Index.cshtml" />
+    <Content Include="Views\Timeline\_TimelineEventPost.cshtml" />
+    <Content Include="Views\Timeline\_TimelineEventPosts.cshtml" />
+    <Content Include="Views\Timeline\ViewModels\_TimelineViewModel.cshtml" />
+    <Content Include="Views\Event\Details.cshtml" />
+    <Content Include="Views\Event\_EventDetailsInvited.cshtml" />
+    <Content Include="Views\User\ViewModels\_DetailsViewModel.cshtml" />
+    <Content Include="Views\User\Details\Business\_UserBusiness.cshtml" />
+    <Content Include="Views\User\DeleteProfile\_DeleteProfileViewModel.cshtml" />
+    <Content Include="Views\Business\CreateViewModel.cshtml" />
+    <Content Include="Views\Timeline\_ViewModelRenderer.cshtml" />
+    <Content Include="Views\Timeline\ViewModels\_TestViewModel.cshtml" />
+    <Content Include="Views\User\Details\Shared\_HeaderButtonsPartial.cshtml" />
+    <Content Include="Views\User\Details\Shared\_ContentPartial.cshtml" />
+    <Content Include="Views\User\Details\Contact\_ContactDetailsPartial.cshtml" />
+    <Content Include="Views\User\Details\Shared\_ProfilePicturePartial.cshtml" />
+    <Content Include="Views\User\ViewModels\_PersonalDetailsViewModel.cshtml" />
+    <Content Include="Views\User\ViewModels\_ContactDetailsViewModel.cshtml" />
+    <Content Include="Views\Timeline\_TimelinePartial.cshtml" />
+    <Content Include="Views\Timeline\ViewModels\_ProfileTimelineViewModel.cshtml" />
+    <Content Include="Views\Event\Search.cshtml" />
+    <Content Include="Views\Event\ViewModels\_SearchViewModel.cshtml" />
+    <Content Include="Views\Event\Search\_EventSearchResponsePartial.cshtml" />
+    <Content Include="Views\Event\Search\_EventBoxPartial.cshtml" />
+    <Content Include="Views\Event\Search\_EventsNotAvailable.cshtml" />
+    <Content Include="Views\Location\Create\_CreateResponsePartial.cshtml" />
+    <Content Include="Views\Spot\Create\_CreateResponsePartial.cshtml" />
+    <Content Include="Views\Location\ViewModels\_CreateLocationViewModel.cshtml" />
+    <Content Include="Views\Spot\ViewModels\_CreateSpotViewModel.cshtml" />
+    <Content Include="Views\Spot\Create\_BusinessDropdownPartial.cshtml" />
+    <Content Include="Views\Spot\Create\_LocationDropdownPartial.cshtml" />
+    <Content Include="Views\Spot\ViewModels\_CreateSpotBusinessViewModel.cshtml" />
+    <Content Include="Views\Spot\ViewModels\_CreateSpotLocationViewModel.cshtml" />
+    <Content Include="Views\Calendar\Index.cshtml" />
+    <Content Include="Views\Calendar\ViewModels\_CalendarViewModel.cshtml" />
+    <Content Include="Views\Calendar\_CalendarResultPartial.cshtml" />
+    <Content Include="Views\Calendar\_DayUnitPartial.cshtml" />
+    <Content Include="Views\Calendar\_CalendarFeatureEventsPartial.cshtml" />
+    <Content Include="Views\Calendar\_CalendarFeatureEventDetailsPartial.cshtml" />
+    <Content Include="Views\Calendar\ViewModels\_DayUnitViewModel.cshtml" />
+    <Content Include="Views\Calendar\ViewModels\_CalendarResultViewModel.cshtml" />
+    <Content Include="Views\Calendar\_ViewModelRenderer.cshtml" />
+    <Content Include="Views\Business\Details\_FeatureEventsPartial.cshtml" />
+    <Content Include="Views\Business\ViewModels\_BusinessDetailsViewModel.cshtml" />
+    <Content Include="Views\Business\Details\_FeatureEventsEmptyPartial.cshtml" />
+    <Content Include="Views\Group\ViewModels\_DetailsViewModel.cshtml" />
+    <Content Include="Views\Group\Details.cshtml" />
+    <Content Include="Views\Group\Details\Shared\_ContentPartial.cshtml" />
+    <Content Include="Views\Group\Details\Shared\_HeaderButtonsPartial.cshtml" />
+    <Content Include="Views\Group\Details\Information\_InformationPartial.cshtml" />
+    <Content Include="Views\Group\Details\Timeline\_TimelinePartial.cshtml" />
+    <Content Include="Views\Group\Details\Posts\_PostPartial.cshtml" />
+    <Content Include="Views\Group\Create.cshtml" />
+    <Content Include="Views\Group\Create\_CreateResponsePartial.cshtml" />
+    <Content Include="Views\Group\ViewModels\CreateViewModel.cshtml" />
+    <Content Include="Views\Group\ViewModels\CreateMemberListViewModel.cshtml" />
+    <Content Include="Views\Shared\_FeatureGroupPartial.cshtml" />
+    <Content Include="Views\Shared\_FeedbackPartial.cshtml" />
+    <Content Include="Views\Shared\ViewModels\_CreateFeedbackViewModel.cshtml" />
+    <Content Include="Views\Shared\_FeedbackCreateResponsePartial.cshtml" />
+    <Content Include="Views\Map\Details.cshtml" />
+    <Content Include="Views\Map\_LoadPartial.cshtml" />
+    <Content Include="Views\Spot\Create\_AvailableHoursIntervalPartial.cshtml" />
+    <Content Include="Views\Spot\ViewModels\_AvailableHoursViewModel.cshtml" />
+    <Content Include="Views\Spot\Create\_AvailableHoursEmptyIntervalPartial.cshtml" />
+    <Content Include="Views\Spot\ViewModels\_AvailableHoursTimeIntervalViewModel.cshtml" />
+    <Content Include="Views\Spot\Create\_AvailableHoursPartial.cshtml" />
+    <Content Include="Views\Map\Config\_MapConfigPartial.cshtml" />
+    <Content Include="Views\Map\_MapEventsPartial.cshtml" />
+    <Content Include="Views\Map\_MapPartial.cshtml" />
+    <Content Include="Views\Event\CreateEventTwo.cshtml" />
+    <Content Include="Views\Event\CreateEventTwo\ViewModels\_NewCreateViewModel.cshtml" />
+    <Content Include="Views\Event\CreateEventTwo\_CreateEventTimeCityPartialPage.cshtml" />
+    <Content Include="Views\Group\Create\_GroupMembersPartial.cshtml" />
+    <Content Include="Views\Group\Details\Information\_AddMemberPartial.cshtml" />
+    <Content Include="Views\Group\ViewModels\_AddMemberViewModel.cshtml" />
+    <Content Include="Views\Group\Details\Information\_MembersPartial.cshtml" />
+    <Content Include="Views\User\Details\Personal\_AddFriendPartial.cshtml" />
+    <Content Include="Views\User\Details\Personal\_RemoveFriendPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Track\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>52384</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44371/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

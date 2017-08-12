@@ -1,0 +1,97 @@
+﻿<script type="text/javascript">
+
+        var DayUnitViewModel = function() {
+
+            var self = this;
+
+            self.load = function() {
+                var day = GetCurrentDay();
+
+                $(".btn-day")
+                    .each(function() {
+                        if ($(this).val() === day) {
+                            $(this).trigger("click");
+                        }
+                    });
+            }
+
+            self.eventClick = function (data, event) {
+
+                var eventTarget = event.target || event.srcElement;
+
+                //event
+                var id = self.findEventButton(eventTarget).val();
+                self.getEventDetails(id);
+
+                //day
+                var day = self.findDayButton(eventTarget).val();
+                self.getDayDetails(day);
+            }
+
+            self.dayUnitClick = function(data, event) {
+
+                var eventTarget = event.target || event.srcElement;
+
+                //day
+                var day = self.findDayButton(eventTarget).val();
+                self.getDayDetails(day);
+
+                //event
+                var id = self.findFirstEventButton(eventTarget).val();
+                self.getEventDetails(id);
+            }
+
+            self.getEventDetails = function(id) {
+
+                var postData = {};
+                postData["id"] = id;
+
+                GetEventDetails(function (response, target) {
+
+                    $(target).html(response);
+                }, postData);
+            }
+
+            self.getDayDetails = function(day) {
+
+                var array = viewModel.date().split(" ");
+                var month = array[0];
+                var year = array[1];
+
+                var postData = {};
+                postData["date"] = day + " " + month + " " + year;
+
+                GetEventsInDay(function (response, target) {
+
+                    $(target).html(response);
+                }, postData);
+            }
+
+            //target helpers
+            self.findDayUnit = function(element) {
+                return $(element).closest(".day-unit");
+            }
+
+            self.findDayButton = function (element) {
+                return $(element).closest(".day-unit").find(".btn-day");
+            }
+
+            self.findEventButton = function (element) {
+                return $(element).closest(".btn-event");
+            }
+
+            self.findFirstEventButton = function (element) {
+                return $(element).closest(".day-unit").find(".btn-event");
+            }
+
+        }
+
+        var dayUnitViewModel = new DayUnitViewModel();
+
+        $(function() {
+
+            ko.applyBindings(dayUnitViewModel, document.getElementById("day-unit-container"));
+
+            dayUnitViewModel.load();
+        });
+</script>

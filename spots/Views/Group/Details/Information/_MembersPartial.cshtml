@@ -1,0 +1,22 @@
+﻿@model IEnumerable<spots.Models.User.ViewModels.UserDetailsViewModel>
+
+@foreach (var item in @Model)
+{
+    <div class="col-xs-3">
+        <div class="row">
+            <div class="col-xs-12">
+                <button type="button" class="btn btn-sm btn-remove btn-remove-user invisible">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+                <a href="@Url.Action("Details", "User" , new {id=item.MongoId}, null)" id="@item.Email">
+                    <img src="~/Content/images/img-empty-1.png" title="@item.FirstName @item.LastName" class="center-img img-standard img-responsive tracked" alt="">
+                </a>
+            </div>
+        </div>
+        <div class="row mg-md-down">
+            <div class="col-xs-12 text-center">
+                <h5>@item.FirstName @item.LastName</h5>
+            </div>
+        </div>
+    </div>
+}

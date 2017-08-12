@@ -1,0 +1,33 @@
+﻿@model IEnumerable<spots.Models.User.Interfaces.IUserBusiness>
+
+<div id="businsess-dropdown" class="form-group row">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+        <div class="row">
+            <div class="col-xs-3">
+                @Html.Label("Businesses", htmlAttributes: new { @class = "control-label" })
+            </div>
+            <div class="col-md-8">
+                <div class="dropdown" role="menu">
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" @*data-bind="click: GetLocations.bind($data)"*@>
+                        <span id="dropdown-selected-business">Select Businesses</span>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-business">
+                        @foreach (var business in Model)
+                        {
+                            <li>
+                                <a href="#" class="optionBusiness" data-bind="click: businessIdChange.bind($data)">@business.Name</a>
+                                <input type="hidden" value="@business.Id.ToString()" />
+                            </li>
+                        }
+                    </ul>
+                    <div id="errorMessageBusiness" class="text-danger field-validation-error" style="display: none;">
+                        Please select a business
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("ViewModels/_CreateSpotBusinessViewModel")

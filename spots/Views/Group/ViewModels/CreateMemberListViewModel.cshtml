@@ -1,0 +1,59 @@
+﻿<script type="text/javascript">
+
+    var MemberListViewModel = function() {
+
+        var self = this;
+
+        self.newMember = ko.observable("");
+        self.newMemberUpdate = true;
+        self.confirmed = ko.observable(false);
+
+        self.items = ko.observableArray([
+            { name: "@Model.CreatedBy", canRemove: false }
+        ]);
+
+        self.resetMemberValue = function(value) {
+            self.newMember("");
+            self.newMember(value);
+        }
+
+        self.addItem = function() {
+            if (self.newMember() !== "") {
+                self.items.push({ name: self.newMember(), canRemove: true });
+                self.newMember("");
+            }
+        }
+
+
+        self.removeItem = function(value) {
+
+            self.items.remove(function(item) {
+                return item.name === value;
+            });
+
+            self.resetMemberValue(self.newMember());
+        }
+
+        self.isVisible = function() {
+
+            if (self.newMember().length > 0) {
+                return true;
+            }
+
+            return false;
+        }
+
+        self.output = ko.computed(function () {
+
+            var data = [];
+            self.items().forEach(function (item) {
+                data.push(item.name);
+            });
+
+            return data;
+        });
+
+        self.alreadyInList = ko.observable(false);
+    }
+</script>
+

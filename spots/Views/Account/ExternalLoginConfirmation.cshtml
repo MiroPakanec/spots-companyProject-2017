@@ -1,0 +1,79 @@
+﻿@model spots.Models.Account.Viewmodels.ExternalLoginConfirmationViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<div class="row text-lg mg-xlg-up text-center">
+    <div class="col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 col-lg-offset-4 col-lg-4 color-test">
+        <h2>@ViewBag.Title.</h2>
+        <h3>Associate your @ViewBag.LoginProvider account.</h3>
+        @using (Html.BeginForm("ExternalLoginConfirmation", "Account", new {ReturnUrl = ViewBag.ReturnUrl}, FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+        {
+        @Html.AntiForgeryToken()
+
+        <hr />
+
+        <div class="row text-md text-left">
+            <div class="col-xs-offset-1 col-xs-10 col-md-offset-1 col-md-10">
+                <div class="row">
+                    <div class="col-md-12 col-md-offset-0" id="error-section">
+                        <p class="text-info">
+                            You've successfully authenticated with <strong>@ViewBag.LoginProvider</strong>.
+                            Please enter a user name for this site below and click the Register button to finish
+                            logging in.
+                        </p>
+                    </div>
+                </div>
+                <hr />
+                <div class="form-group">
+                    <div class="col-xs-12 col-md-4">
+                        @Html.LabelFor(m => m.Email, new {@class = "control-label"})
+                    </div>
+                    <div class="col-xs-12 col-md-8">
+                        @Html.TextBoxFor(m => m.Email, new {@class = "form-control"})
+                        @Html.ValidationMessageFor(m => m.Email, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12 col-md-4">
+                        @Html.LabelFor(m => m.FirstName, new {@class = "control-label"})
+                    </div>
+                    <div class="col-xs-12 col-md-8">
+                        @Html.TextBoxFor(m => m.FirstName, new {@class = "form-control"})
+                        @Html.ValidationMessageFor(m => m.FirstName, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12 col-md-4">
+                        @Html.LabelFor(m => m.LastName, new { @class = "control-label" })
+                    </div>
+                    <div class="col-xs-12 col-md-8">
+                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-md-offset-0" id="error-section">
+                        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12 col-xs-offset-0 col-md-8 col-md-offset-2">
+                        <button type="submit" class="btn btn-default btn-md btn-block btn-standard mg-sm-up">
+                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Register
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+

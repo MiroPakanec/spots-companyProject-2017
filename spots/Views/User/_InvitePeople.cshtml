@@ -1,0 +1,48 @@
+﻿@model IEnumerable<spots.Models.User.SpotUser>
+
+<!--Invite Box-->
+<div class="row invitation-box">
+    <div class="col-xs-10 col-xs-offset-1 border-standard-light border-all pd-sm-down">
+        <div class="row">
+            <div class="col-xs-12 text-center mg-sm-up mg-sm-down">
+                <p>Invite people to your event</p>
+            </div>
+        </div>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+
+                <!--<input type="text" name="invited" value="@item.MongoId"/>-->
+
+                <!--User Row-->
+                <div type="button" class="btn btn-block btn-sm btn-default border-standard-light border-up btn-invite">
+                    <div class="row pd-sm-up pd-sm-down">
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <span class="glyphicon glyphicon-user text-center"></span>
+                                </div>
+                                <div class="col-xs-10 text-left">
+                                    @($"{item.FirstName} {item.MiddleName} {item.LastName}")
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-10 col-xs-offset-2 text-left color-standard text-sm">
+                                    @item.Email
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="invited" id="@item.MongoId"></div>
+                </div>
+
+
+            }
+        }
+        else
+        {
+            <p>No results found.</p>
+        }
+    </div>
+</div>

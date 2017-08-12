@@ -1,0 +1,115 @@
+﻿@model spots.Models.Account.Viewmodels.DeleteViewModel
+
+@{
+    ViewBag.Title = "Delete your account";
+    Layout = "~/Views/Shared/_InLayout.cshtml";
+}
+
+<div class="row mg-lg-up">
+    <div class="col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 border-standard-exclude border-color-top">
+        <div class="row text-center">
+            <h2>@ViewBag.Title</h2>
+            <div class="col-md-12">
+                @using (Html.BeginForm("DeleteProfileConfirm", "User", new {ReturnUrl = ViewBag.ReturnUrl}, FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+                {
+                    @Html.HttpMethodOverride(HttpVerbs.Delete)
+                    @Html.AntiForgeryToken()
+                    <hr/>
+                    @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+
+                    <div class="row mg-md-down">
+                        <div class="col-xs-10 col-xs-offset-1 text-left text-warning">
+                            An email with a verification code has been sent to the following Email address. Please enter your <strong>password</strong> and the <strong>verification code</strong> below.
+                        </div>
+                    </div>
+                    <div class="row text-left">
+                        <div class="col-xs-10 col-xs-offset-1">
+                            <!--Email-->
+                            <div class="row mg-sm-down">
+                                @Html.LabelFor(m => m.Email, new {@class = "col-xs-4"})
+                                <div class="col-xs-8">
+                                    @Html.LabelForModel(Model.Email, new {type = "text", disabled = "true"})
+                                    @Html.TextBoxFor(m => m.Email, new {@class = "", type = "hidden"})
+                                </div>
+                            </div>
+                            <!--Password-->
+                            <div class="row mg-sm-down">
+                                @Html.LabelFor(m => m.Password, new {@class = "col-xs-4"})
+                                <div class="col-xs-8">
+                                    @Html.PasswordFor(m => m.Password, new {@class = "form-control"})
+                                </div>
+                            </div>
+                            <!--Password Validation-->
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <p class="has-error">
+                                        @Html.ValidationMessageFor(m => m.Password)
+                                    </p>
+                                </div>
+                            </div>
+                            <!--Code-->
+                            <div class="row mg-sm-down">
+                                @Html.LabelFor(m => m.Code, new {@class = "col-xs-4"})
+                                <div class="col-xs-4">
+                                    @Html.TextBoxFor(m => m.Code, new {@class = "form-control"})
+                                    @Html.TextBoxFor(m => m.GeneratedCode, new {@class = "", type = "hidden", data_bind = "value:generatedCode"})
+                                </div>
+                                <div class="col-xs-2">
+                                    <button type="button" class="btn btn-default btn-standard btn-md btn-block" title="Send email" data-bind="click:sendEmail()">
+                                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <!--Code Validation-->
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <p class="has-error">
+                                        @Html.ValidationMessageFor(m => m.Code)
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 text-center">
+                                    <p data-bind="html:response" id="response"></p>
+                                </div>
+                            </div>
+                            <div class="row mg-sm-down mg-lg-up">
+                                <div class="col-xs-12 col-xs-offset-0 text-left text-danger text-center">
+                                    Following changes are <strong>Permanent</strong> <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>.
+                                </div>
+                            </div>
+                            <div class="row mg-lg-down">
+                                <div class="col-xs-6">
+                                    <!--Back button-->
+                                    <a href="@Url.Action("Details", "User")" title="Do NOT delete profile" class="btn btn-default btn-sm btn-block">
+                                        <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>Go back
+                                    </a>
+                                </div>
+                                <div class="col-xs-6">
+                                    <!--Delete button-->
+                                    <button type="submit" class="btn btn-danger btn-sm btn-block" title="Delete profile">
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@Scripts.Render("~/bundles/DeleteProfile")
+@Scripts.Render("~/bundles/tools")
+@Scripts.Render("~/bundles/jqueryval")
+
+@Styles.Render("~/bundles/cssval")
+
+
+@Html.Partial("DeleteProfile/_DeleteProfileViewModel")
+
+
+
+
+
+

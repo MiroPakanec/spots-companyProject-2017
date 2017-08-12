@@ -1,0 +1,58 @@
+﻿@model spots.Modules.Timeline.Interfaces.ITimelineEvent
+
+<!--Post Box-->
+<div class="row mg-sm-down">
+    <div class="col-xs-12 border-standard border-all bg-color-standard-light">
+        <!--Inner container-->
+        <div class="row">
+            <div class="col-xs-12 mg-sm-up mg-sm-down">
+                <!--User-->
+                <!--Picture-->
+                <div class="row">
+                    <div class="col-xs-2">
+                        <img src="~/Content/images/img-empty-1.png" alt="Spot img" class="img-standard img-responsive">
+                    </div>
+                    <div class="col-xs-10 pd-xs-left">
+                        <p>
+                            @Html.ActionLink(Model.FirstName, "Details", "User", new {id = Model.UserId}, new { @class = "tracked" })
+                            has joined an event
+                            @Html.ActionLink(Model.EventTitle, "Details", "Event", new {id = Model.EventId}, new { @class = "tracked" })
+                        </p>
+                        <p class="text-sm color-standard-dark">
+                            @Model.Joined
+                        </p>
+                    </div>
+                </div>
+                <hr class="border-standard mg-sm-up mg-xs-down" />
+                <!--Image-->
+                <div class="row">
+                    <div class="col-xs-12">
+                        <img src="~/Content/images/img-empty-3.png" alt="Spot img" class="center-img img-standard img-responsive">
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h3>
+                                    @Html.ActionLink(Model.EventTitle, "Details", "Event", new {id = Model.EventId}, new { @class = "tracked" })
+                                </h3>
+                                <p>Starting @Model.EventStart</p>
+                                <p>
+                                    At
+                                    @Html.ActionLink(Model.BusinessName, "Details", "Business", new {id = Model.BusinessId}, new { @class = "tracked" })'s
+                                    @Html.ActionLink(Model.SpotName, "Details", "Spot", new {id = Model.SpotId}, new { @class = "tracked" })
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="border-standard mg-sm-down" />
+                <div class="row">
+                    <div class="col-xs-12 text-sm color-standard">
+                        <p>@Model.Address @Model.City @Model.Zip @Model.Country</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

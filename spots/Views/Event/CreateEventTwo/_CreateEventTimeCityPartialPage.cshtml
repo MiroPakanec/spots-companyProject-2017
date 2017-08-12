@@ -1,0 +1,49 @@
+﻿@model IEnumerable<spots.Models.Event.ViewModels.CommonFreeTimesViewModel>
+
+
+<!--Time Availability-->
+@if (Model.Any() == false)
+{
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="row timeslots pd-md-up pd-md-down border-down border-standard">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-12 text-center">
+                            There are no common time slots.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-xs-12">
+            @foreach (var item in Model)
+                {
+                <div class="row border-down border-standard">
+                    @*<button class="btn btn-standard btn-block btn-event btn-time">*@
+
+                    @*</button>*@
+                    <button class="btn btn-standard btn-block btn-time">
+                        <div class="col-xs-12 pd-md-up pd-md-down">
+                            <div class="row">
+                                <div class="col-xs-12 text-center">
+                                    <p class="time-management">@item.StartDate - @item.EndDate</p>
+                                </div>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+
+            }
+        </div>
+    </div>
+}
+
+
+

@@ -1,0 +1,117 @@
+﻿<script type="text/javascript">
+    var ViewModel = function() {
+
+        var self = this;
+
+        self.availableHoursViewModel = new AvailableHoursViewModel();
+
+        self.spotName = ko.observable("");
+        self.capacity = ko.observable("");
+        self.visible = ko.observable(false);
+
+
+
+        self.isRemoveable = function (observable) {
+            if (observable().length > 0) {
+                return true;
+            }
+
+            return false;
+        }
+
+        //self.checkBoxClick = function () {
+        //    alert();
+        //    if (self.visible()) {
+        //        self.visible(false);
+        //        return;
+        //    }
+
+        //    self.visible(true);
+        //}
+
+        self.remove = function (observable) {
+            observable("");
+        }
+
+        self.clearAllInputs = function () {
+            self.spotName("");
+            self.capacity("");
+            $("#createSpotForm").valid();
+        }
+
+        self.submit = function () {
+
+            if ($("#createSpotForm").valid() === false || self.availableHoursViewModel.areDatesCorrect() === false) {
+                return;
+            } 
+            
+            if (self.isBusinessValid() == false) return;
+            if (self.isLocationValid() == false) return;
+
+            var data = self.serialize();
+            console.log(data);
+
+            CreateSpot(function (response, target) {
+                $(target).html(response);
+            }, data);
+        }
+
+        self.isBusinessValid = function () {
+
+            if (businessViewModel.businessId().length <= 0) {
+                $('#errorMessageBusiness').show();
+                return false;
+            }
+
+            $('#errorMessageBusiness').hide();
+            return true;
+        }
+
+        self.isLocationValid = function () {
+
+            if (locationViewModel.locationId().length <= 0) {
+                $('#errorMessageLocation').show();
+                return false;
+            }
+
+            $('#errorMessageLocation').hide();
+            return true;
+        }
+
+        self.serialize = function () {
+
+            var data = {};
+            data["LocationId"] = locationViewModel.locationId();
+            data["Capacity"] = self.capacity();
+            data["Name"] = self.spotName();
+            data["Visible"] = self.visible();
+
+            data["DaylyAvailableHours"] = self.availableHoursViewModel.serialize();
+
+            return data;
+        }
+
+        self.loadBusinesses = function () {
+
+            GetBusinesses(function (response, target) {
+                $(target).html(response);
+            }, null);
+        }
+    }
+
+    var viewModel = new ViewModel();
+
+    viewModel.availableHoursViewModel.allDays.subscribe(function () {
+        //validate days on checkbox click
+        viewModel.availableHoursViewModel.validateDates();
+    });
+
+    $(function () {
+        ko.applyBindings(viewModel);
+
+        LoadTimeIntervals();
+        viewModel.loadBusinesses();
+    });
+
+
+</script>

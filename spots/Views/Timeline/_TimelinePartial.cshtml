@@ -1,0 +1,30 @@
+﻿
+<div id="timeline">
+    <div class="row">
+        <div class="col-xs-12">
+            <!--Top buttons-->
+            <div class="row mg-sm-down">
+                <div class="col-xs-2 col-xs-offset-5">
+                    <div class="row">
+                        <div class="col-xs-6 no-side-padding">
+                            <button id="future-button" class="btn btn-standard btn-block btn-primary tracked" data-bind="click:LoadFuturePosts">Future</button>
+                        </div>
+                        <div class="col-xs-6 no-side-padding">
+                            <button id="history-button" class="btn btn-standard btn-block btn-primary tracked" data-bind="click:LoadHistoryPosts">History</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Posts-->
+            <div id="posts"></div>
+        </div>
+    </div>
+</div>
+
+
+@Scripts.Render("~/bundles/Timeline")
+@Scripts.Render("~/bundles/jqueryval")
+
+
+@Html.Partial("_ViewModelRenderer", ViewData["Type"])
+

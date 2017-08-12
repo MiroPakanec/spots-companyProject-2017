@@ -1,0 +1,240 @@
+﻿@model spots.Models.Business.ViewModels.CreateBusinessViewModel
+
+    @{
+    ViewBag.Title = "Create new business";
+    Layout = "~/Views/Shared/_InLayout.cshtml";
+    }
+
+<div class="row">
+    <div class="col-sm-10 col-sm-push-1">
+        <div class="row mg-sm-up">
+            <div class="col-sm-12 col-sm-push-0">
+                <!--Title-->
+                <h2 class="text-center">@ViewBag.Title</h2>
+            </div>
+        </div>
+        <div id="create-business">
+            <!--Html form-->
+            @using (Html.BeginForm("Create", "Business", FormMethod.Post, new {id = "createBusinessForm"}))
+            {
+                <!--Token-->
+                @Html.AntiForgeryToken()
+
+                <div class="row mg-lg-up">
+                    <div class="col-xs-10 col-xs-offset-1">
+                        <div class="row">
+                        <div class="col-xs-12 col-xs-offset-0 col-md-8 col-md-offset-2">
+                            <div class="row">
+                                <p class="">Info</p>
+                                <hr class="border-standard-light" />
+                            </div>
+                        <!--Property-->
+                        <!--Name-->
+                        <div class="propery">
+                            <!--Property row-->
+                            <div class="row property-info pd-sm-down">
+                                <div class="col-xs-3 text-left">
+                                    <!--Property name -->
+                                    @Html.LabelFor(m => m.Name)
+                                </div>
+                                <div class="col-xs-6">
+                                    <!--Property value sent to controller-->
+                                    @Html.TextBoxFor(m => m.Name, new {@class = "property-value form-control", type = "text", data_bind = "value:nameInput, valueUpdate:'keyup'"})
+                                    @Html.ValidationMessageFor(m => m.Name, "", new {@class = "text-danger"})
+                                </div>
+                                <div class="col-xs-1">
+                                    <!--Remove button-->
+                                    <button type="button" class="btn btn-sm btn-remove" data-bind="visible: isRemoveable(nameInput), click: clearInput.bind($data, viewModel.nameInput)">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Property End-->
+
+                        <!--Property-->
+                        <!--Tax number-->
+                        <div class="propery">
+                            <!--Property row-->
+                            <div class="row property-info pd-sm-down">
+                                <div class="col-xs-3 text-left">
+                                    <!--Property name -->
+                                    @Html.LabelFor(m => m.TaxNumber)
+                                </div>
+                                <div class="col-xs-6">
+                                    <!--Property value sent to controller-->
+                                    @Html.TextBoxFor(m => m.TaxNumber, new {@class = "property-value form-control", type = "text", data_bind = "value:taxNumberInput, valueUpdate:'keyup'"})
+                                    @Html.ValidationMessageFor(m => m.TaxNumber, "", new {@class = "text-danger"})
+                                </div>
+                                <div class="col-xs-1">
+                                    <!--Remove button-->
+                                    <button type="button" class="btn btn-sm btn-remove" data-bind="visible: isRemoveable(taxNumberInput), click: clearInput.bind($data, viewModel.taxNumberInput)">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Property End-->
+
+                        <!--Property-->
+                        <!--Phone number-->
+                        <div class="propery">
+                            <!--Property row-->
+                            <div class="row property-info pd-sm-down">
+                                <div class="col-xs-3 text-left">
+                                    <!--Property name -->
+                                    @Html.LabelFor(m => m.PhoneNumber)
+                                </div>
+                                <div class="col-xs-6">
+                                    <!--Property value sent to controller-->
+                                    @Html.TextBoxFor(m => m.PhoneNumber, new {@class = "property-value form-control", type = "text", data_bind = "value:phoneNumberInput, valueUpdate:'keyup'"})
+                                    @Html.ValidationMessageFor(m => m.PhoneNumber, "", new {@class = "text-danger"})
+                                </div>
+                                <div class="col-xs-1">
+                                    <!--Remove button-->
+                                    <button type="button" class="btn btn-sm btn-remove" data-bind="visible: isRemoveable(phoneNumberInput), click: clearInput.bind($data, viewModel.phoneNumberInput)">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Property End-->
+
+                        <div class="row">
+                            <p class="mg-lg-up">Headquarters</p>
+                            <hr class="border-standard-light"/>
+                        </div>
+
+                        <!--Property-->
+                        <!--Address-->
+                        <div class="propery">
+                            <!--Property row-->
+                            <div class="row property-info pd-sm-down">
+                                <div class="col-xs-3 text-left">
+                                    <!--Property name -->
+                                    @Html.LabelFor(m => m.Address)
+                                </div>
+                                <div class="col-xs-6">
+                                    <!--Property value sent to controller-->
+                                    @Html.TextBoxFor(m => m.Address, new {@class = "property-value form-control", type = "text", data_bind = "value:addressInput, valueUpdate:'keyup'"})
+                                    @Html.ValidationMessageFor(m => m.Address, "", new {@class = "text-danger"})
+                                </div>
+                                <div class="col-xs-1">
+                                    <!--Remove button-->
+                                    <button type="button" class="btn btn-sm btn-remove" data-bind="visible: isRemoveable(addressInput), click: clearInput.bind($data, viewModel.addressInput)">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Property End-->
+
+                        <!--Property-->
+                        <!--ZIP-->
+                        <div class="propery">
+                            <!--Property row-->
+                            <div class="row property-info pd-sm-down">
+                                <div class="col-xs-3 text-left">
+                                    <!--Property name -->
+                                    @Html.LabelFor(m => m.Zip)
+                                </div>
+                                <div class="col-xs-6">
+                                    <!--Property value sent to controller-->
+                                    @Html.TextBoxFor(m => m.Zip, new {@class = "property-value form-control", type = "text", data_bind = "value:zipInput, valueUpdate:'keyup'"})
+                                    @Html.ValidationMessageFor(m => m.Zip, "", new {@class = "text-danger"})
+                                </div>
+                                <div class="col-xs-1">
+                                    <!--Remove button-->
+                                    <button type="button" class="btn btn-sm btn-remove" data-bind="visible: isRemoveable(zipInput), click: clearInput.bind($data, viewModel.zipInput)">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Property End-->
+
+                        <!--Property-->
+                        <!--City-->
+                        <div class="propery">
+                            <!--Property row-->
+                            <div class="row property-info pd-sm-down">
+                                <div class="col-xs-3 text-left">
+                                    <!--Property name -->
+                                    @Html.LabelFor(m => m.City)
+                                </div>
+                                <div class="col-xs-6">
+                                    <!--Property value sent to controller-->
+                                    @Html.TextBoxFor(m => m.City, new {@class = "property-value form-control", type = "text", data_bind = "value:cityInput, valueUpdate:'keyup'"})
+                                    @Html.ValidationMessageFor(m => m.City, "", new {@class = "text-danger"})
+                                </div>
+                                <div class="col-xs-1">
+                                    <!--Remove button-->
+                                    <button type="button" class="btn btn-sm btn-remove" data-bind="visible: isRemoveable(cityInput), click: clearInput.bind($data, viewModel.cityInput)">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Property End-->
+
+                        <!--Property-->
+                        <!--Country-->
+                        <div class="propery">
+                            <!--Property row-->
+                            <div class="row property-info pd-sm-down">
+                                <div class="col-xs-3 text-left">
+                                    <!--Property name -->
+                                    @Html.LabelFor(m => m.Country)
+                                </div>
+                                <div class="col-xs-6">
+                                    <!--Property value sent to controller-->
+                                    @Html.TextBoxFor(m => m.Country, new {@class = "property-value form-control", type = "text", data_bind = "value:countryInput, valueUpdate:'keyup'"})
+                                    @Html.ValidationMessageFor(m => m.Country, "", new {@class = "text-danger"})
+                                </div>
+                                <div class="col-xs-1">
+                                    <!--Remove button-->
+                                    <button type="button" class="btn btn-sm btn-remove" data-bind="visible: isRemoveable(countryInput), click: clearInput.bind($data, viewModel.countryInput)">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Property End-->
+
+                        </div>
+                        </div>
+                        <div class="row mg-md-up">
+                            <div class="col-xs-2 col-xs-offset-5">
+                                <!--Clear button-->
+                                <button type="button" title="Clear" class="btn btn-sm btn-block" data-bind="click : clearAllInputs()">
+                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Clear
+                                </button>
+                            </div>
+                            <div class="col-xs-2">
+                                <!--Save button-->
+                                <button type="submit" title="Save" class="btn btn-sm btn-block btn-confirm">
+                                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<div class="row mg-lg-up">
+    <div class="col-xs-6 col-xs-offset-3">
+        <div id="businessCreate-ajax-response"></div>
+    </div>
+</div>
+
+@Html.Partial("CreateViewModel")
+
+@section Scripts {
+    @Scripts.Render("~/bundles/Business")
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+@Styles.Render("~/bundles/cssval")
+

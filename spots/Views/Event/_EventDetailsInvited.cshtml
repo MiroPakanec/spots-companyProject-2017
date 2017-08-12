@@ -1,0 +1,12 @@
+﻿@model List<spots.Models.User.SpotUser>
+
+<div class="row">
+    @foreach (var user in @Model)
+    {
+        <div class="col-xs-3 btn">
+            <a href="@Url.Action("Details", "User", new {id = user.MongoId}, null)">
+                <img src="~/Content/images/img-empty-1.png" title="@user.FirstName @user.LastName" class="img-standard img-responsive tracked" alt="">
+            </a>
+        </div>
+    }
+</div>

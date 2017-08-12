@@ -1,0 +1,24 @@
+﻿@model string
+
+@{
+    switch (Model.ToLower().Trim())
+    {
+    case "global":
+        {
+            @Html.Partial("ViewModels/_TimelineViewModel")
+            break;
+        }
+    case "user":
+        {
+            @Html.Partial("ViewModels/_ProfileTimelineViewModel")
+            break;
+        }
+    case "test":
+        {
+            @Html.Partial("ViewModels/_TestViewModel")
+            break;
+        }
+    default:
+            break;
+    }
+}

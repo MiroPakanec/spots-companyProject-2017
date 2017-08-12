@@ -1,0 +1,44 @@
+﻿@model spots.Models.Account.Viewmodels.DeleteViewModel
+
+<script type="text/javascript">
+    var ViewModel = function () {
+
+        var self = this;
+
+        self.generatedCode = ko.observable("");
+        self.response = ko.observable("");
+        self.responseVisible = ko.observable(false);
+
+        self.sendEmail = function() {
+
+            GetCode(function (response) {
+
+                self.generatedCode(response);
+            });
+
+            SendEmail(function (response) {
+                self.showResponse(response);
+                console.log(response);
+            });
+        }
+
+        self.showResponse = function (response) {
+
+            if (self.responseVisible() === false) {
+                $("#response").hide();
+                self.response(response);
+                $("#response").slideDown(1000);
+                self.responseVisible(true);
+
+                setTimeout(function () {
+
+                    $("#response").slideUp(1000);
+                    self.responseVisible(false);
+                }, 8000);
+            }
+        }
+    }
+
+    var viewModel = new ViewModel();
+    ko.applyBindings(viewModel);
+</script>

@@ -1,0 +1,86 @@
+﻿<script type="text/javascript">
+
+        var ViewModel = function() {
+
+            var self = this;
+
+            self.date = ko.observable("");
+
+            self.serializer = new Serializer();
+
+            self.getCurrentDate = function() {
+
+                var month = GetCurrentMonth();
+                var year = GetCurrentYear();
+
+                var data = self.serializer.titleDateData(month, year, 0);
+
+                console.log(data);
+
+                GetDate(function (response) {
+                    console.log(response);
+                    self.date(response);
+                }, data);
+            }
+
+            self.updateDate = function(increment) {
+
+                var array = self.date().split(" ");
+                var month = array[0];
+                var year = array[1];
+
+                var data = self.serializer.titleDateData(month, year, increment);
+
+                GetDate(function (response) {
+                        console.log(response);
+                        self.date(response);
+                    },
+                    data);
+            }
+
+            self.updateCalendar = function(date) {
+                
+                var data = self.serializer.dateString(date);
+
+                GetCalendarContent(function(response, target) {
+                    $(target).html(response);
+                }, data);
+            }
+        }
+
+        var Serializer = function() {
+
+            var self = this;
+
+            self.titleDateData = function(month, year, increment) {
+                var data = {};
+
+                data["month"] = month;
+                data["year"] = year;
+                data["increment"] = increment;
+
+                return data;
+            }
+
+            self.dateString = function(date) {
+                var data = {};
+
+                data["dateString"] = date;
+
+                return data;
+            }
+        }
+
+        var viewModel = new ViewModel();
+
+        //subscribers
+        viewModel.date.subscribe(function(value) {
+
+            viewModel.updateCalendar(value);
+        });
+
+    $(function() {
+        ko.applyBindings(viewModel);
+    });
+
+</script>

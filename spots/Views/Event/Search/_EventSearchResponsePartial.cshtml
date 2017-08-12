@@ -1,0 +1,12 @@
+﻿@model IEnumerable<spots.Models.Event.ViewModels.EventDetailsViewModel>
+
+<div class="row">
+    <div class="col-xs-10 col-xs-offset-1">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                @Html.Partial("Search/_EventBoxPartial", item)
+            }
+        </div>
+    </div>
+</div>

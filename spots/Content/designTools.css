@@ -1,0 +1,98 @@
+﻿/*Text*/
+.text-xs{ font-size: 5px;}
+.text-sm{ font-size: 10px;}
+.text-md{ font-size: 15px;}
+.text-lg{ font-size: 20px;}
+
+/*Color*/
+.color-standard{ color: #999999;}
+.color-standard-dark { color: #222222}
+.color-standard-light { color: #dfdfdf}
+
+.bg-color-standard{ background-color: #999999;}
+.bg-color-standard-dark { background-color: #222222;}
+.bg-color-standard-light { background-color: #dfdfdf;}
+.bg-color-standard-white { background-color: #ffffff;}
+
+/*Border*/
+.border-up { border-top: 1px solid;}
+.border-down { border-bottom: 1px solid;}
+.border-left { border-left: 1px solid; }
+.border-right { border-right: 1px solid; }
+.border-all { border: 1px solid;}
+.border-none { border: none;}
+
+.border-standard{ border-color: #999999;}
+.border-standard-dark{ border-color: #222222;}
+.border-standard-light{ border-color: #dfdfdf;}
+
+.border-color-top { border-top: 10px solid #00ff7f; }
+.border-standard-exclude {
+    border-bottom: 1px solid #999999;
+    border-left: 1px solid #999999;
+    border-right: 1px solid #999999;
+}
+
+/*visiblitity*/
+.visible { display: block;}
+.invisible { display: none;}
+
+/*Buttons*/
+
+.btn-standard {
+    border-radius:0;
+}
+
+.btn-standard-white {
+    background-color: #ffffff;
+    border-radius:0;
+}
+
+.btn-selected{
+    border: 3px solid #98fb98;
+    background-color: #efefef;
+}
+
+.btn-feature {
+    border-top: 1px solid #999999;
+    border-bottom: 1px solid #999999;
+    border-left: none;
+    border-right: none;
+    border-radius:0;
+
+    background-color: #dfdfdf;
+
+    -webkit-transition-duration: 0.5s;
+    -moz-transition-duration: 0.5s;
+    -o-transition-duration: 0.5s;
+    -ms-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+}
+
+/*text*/
+.has-error { color: #a52a2a;}
+.has-success { color: #2e8b57;}
+
+.btn-feature:hover {
+    background-color: #eeeeee;
+}
+
+input[type="button"]:disabled {
+    background: #ddd;
+}
+
+.input-standard {
+    border: none;
+}
+
+/*images*/
+.img-standard {
+    border: 1px solid #999999;
+}
+
+/*To remove*/
+.invitation-box {
+    max-height: 400px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}

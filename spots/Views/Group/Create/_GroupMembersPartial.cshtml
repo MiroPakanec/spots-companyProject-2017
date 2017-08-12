@@ -1,0 +1,77 @@
+﻿@model spots.Models.Group.ViewModels.CreateGroupViewModel
+<div class="row mg-lg-up">
+    <div class="col-xs-10 col-xs-offset-1">
+        <div class="row">
+            <div class="col-xs-12 col-xs-offset-0 col-md-8 col-md-offset-2">
+                <!--Members-->
+                <div class="row">
+                    <div class="col-xs-10 col-xs-offset-0 mg-sm-up mg-sm-down border-all border-standard-light">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h4 class="text-center">Group members</h4>
+                                <hr class="border-standard-light" />
+                            </div>
+                        </div>
+                        <div data-bind="foreach: memberList.items">
+                            <!--Member-->
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="row pd-sm-up pd-sm-down">
+                                        <div class="col-xs-1">
+                                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                        </div>
+                                        <div class="col-xs-9">
+                                            <label data-bind="text: name"></label>
+                                        </div>
+                                        <div class="col-xs-1">
+                                            <button type="button" class="btn btn-sm" data-bind="click: viewModel.memberList.removeItem.bind($data, name), visible: canRemove">
+                                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <hr class="border-standard-light no-margin" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pd-md-down pd-md-up">
+                            <div class="col-xs-3 text-left">
+                                <!--Property name -->
+                                @Html.Label("Add member")
+                            </div>
+                            <form data-bind="submit: memberList.addItem">
+
+                                <div class="col-xs-6">
+                                    <input id="newMember" class="form-control" data-bind='value: memberList.newMember, valueUpdate: "afterkeydown"' , autocomplete="off" />
+                                    <div style="display: none;" data-bind="visible: true">
+                                        <span class="row text-danger text-center" data-bind="visible: memberList.alreadyInList()">This item is already in the list!</span>
+                                    </div>
+                                    <div data-bind="html:emailResponse"></div>
+                                </div>
+                                <div class="col-xs-1">
+                                    <!--Confirm button-->
+                                    <button type="submit" class="btn btn-sm" data-bind="enable: memberList.confirmed, visible: memberList.isVisible()">
+                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                                <div class="col-xs-1">
+                                    <!--Remove button-->
+                                    <button type="button" class="btn btn-sm" data-bind="click: memberList.resetMemberValue.bind($data, ''), visible: memberList.isVisible()">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <!--Property End-->
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("ViewModels/CreateMemberListViewModel")
+@Html.Partial("ViewModels/CreateViewModel")
+
+
+

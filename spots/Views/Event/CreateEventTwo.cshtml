@@ -1,0 +1,289 @@
+﻿@model spots.Models.Event.ViewModels.CreateEventViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_InLayout.cshtml";
+}
+
+<h2 class="text-center">Create new event</h2>
+<div class="row">
+    <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4">
+
+        <div class="form-horizontal">
+
+            <!--People partial-->
+            <div id="people-response"></div>
+
+            <!--Date-->
+            <div class="property mg-md-up">
+                <div class="row">
+                    <div class="col-xs-offset-4 col-xs-7">
+                        <!--Input-->
+                        <div class="input-group date datepicker" id="startDate">
+                            <input type="text" class="form-control" data-bind="value: startDateInput" readonly="readonly" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Search spots-->
+            <div class="form-group mg-lg-up">
+                <div class="col-xs-12">
+                    <p>Click search and the just select the time.</p>
+                </div>
+                <div class="col-md-offset-9 col-md-2">
+                    <input type="submit" value="Search" data-bind="click: GetTimeslots" id="time-search" class="btn btn-default search-time-slots" />
+                </div>
+            </div>
+
+            <!--Time/City partial-->
+            <div id="timecity-response" data-bind="html : availableTimeSlotsResponse"></div>
+
+            <div id="time-city" class="invisible">
+                
+                <!--Time1-->
+                <div class="property mg-md-up">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <!--Label-->
+                            @Html.LabelFor(model => model.StartDateTime, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-xs-7">
+                            <!--Input-->
+                            <div class="input-group date timepicker" id="startDate">
+                                @Html.EditorFor(m => m.StartDateTime, new { htmlAttributes = new { @class = "form-control", data_bind = "value: startTime", @readonly = "readonly" } })
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-time"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Time2-->
+                <div class="property mg-sm-up">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <!--Label-->
+                            @Html.LabelFor(model => model.EndDateTime, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-xs-7">
+                            <!--Input-->
+                            <div class="input-group date timepicker" id="endDate">
+                                @Html.EditorFor(m => m.EndDateTime, new { htmlAttributes = new { @class = "form-control", data_bind = "value: endTime, valueUpdate:'keyup'", @readonly = "readonly" } })
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-time"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!--City-->
+                <div class="property">
+                    <div class="row mg-sm-up">
+                        <div class="col-xs-12">
+                            <p>Enter the city, where the event will happen...</p>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-xs-4">
+                            <!--Label-->
+                            @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-xs-7">
+                            <!--Input-->
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control", data_bind = "value: locationInput, valueUpdate:'keyup'", autocomplete = "off" } })
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-12 col-sm-5" id="location-response"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-1">
+                            <!--Remove button-->
+                            <button type="button" class="btn btn-sm btn-remove" data-bind="visible: isRemoveable(locationInput), click: clearInput.bind($data, newViewModel.locationInput)">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <hr class="border-standard-light" />
+                
+                <!--Search spots-->
+                <div class="form-group mg-lg-up">
+                    <div class="col-xs-12">
+                        <p>Click search and the just select a spot.</p>
+                    </div>
+                    <div class="col-md-offset-9 col-md-2">
+                        <input type="submit" value="Search" class="btn btn-default" id="search-spots" data-bind="click: availableSpots" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Response-->
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1">
+            <div id="spots-ajax-response" data-bind="html : availableSpotsResponse"></div>
+        </div>
+    </div>
+
+    <!--Spot/Info partial-->
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4">
+            <div data-bind="visible: hasSpots()">
+                <hr class="border-standard-light    " />
+                <!--Title-->
+                <div class="property mg-lg-up">
+                    <div class="row form-group">
+                        <div class="col-xs-4">
+                            <!--Label-->
+                            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-xs-7">
+                            <!--Input-->
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", data_bind = "value: titleInput, valueUpdate:'keyup'" } })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-1">
+                            <!--Remove button-->
+                            <button type="button" class="btn btn-sm btn-remove" data-bind="visible: isRemoveable(titleInput), click: clearInput.bind($data, newViewModel.titleInput)">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <!--Description-->
+                <div class="property mg-sm-up">
+                    <div class="row form-group">
+                        <div class="col-xs-4">
+                            <!--Label-->
+                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-xs-7">
+                            <!--Input-->
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @rows = 3, data_bind = "value: descriptionInput, valueUpdate:'keyup'" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-1">
+                            <!--Remove button-->
+                            <button type="button" class="btn btn-sm btn-remove" data-bind="visible: isRemoveable(descriptionInput), click: clearInput.bind($data, newViewModel.descriptionInput)">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <!--Visibility-->
+                <div class="property mg-sm-up">
+                    <div class="row mg-sm-up">
+                        <div class="col-xs-12">
+                            <p>Please check this option, if you want the event to be visible to users that were not invited.</p>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-4">
+                            <!--Label-->
+                            @Html.LabelFor(model => model.Visibility, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-xs-7">
+                            <!--Input-->
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    @Html.CheckBoxFor(model => model.Visibility, new { data_bind = "checked: visibility" } ))
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            @Html.ValidationMessageFor(model => model.Visibility, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <!--Availability-->
+                <div class="property mg-sm-up">
+                    <div class="row mg-sm-up">
+                        <div class="col-xs-12">
+                            <p>Please check this option, if you want other users to join.</p>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-4">
+                            <!--Label-->
+                            @Html.LabelFor(model => model.Availability, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-xs-7">
+                            <!--Input-->
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    @Html.CheckBoxFor(model => model.Availability, new { data_bind = "checked: availability" } ))
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            @Html.ValidationMessageFor(model => model.Availability, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <hr class="border-standard-light" />
+                
+                <!--Create event-->
+                <div class="form-group row mg-lg-up mg-lg-down">
+                    <div class="col-md-offset-9 col-md-2">
+                        <input type="submit" value="Create event" class="btn btn-default" data-bind="click: submitEvent" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Response-->
+<div class="row mg-sm-up mg-sm-down">
+    <div class="col-xs-11 col-xs-offset-1" id="create-event-response"></div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/NewEventCreate")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/datetimepicker-js")
+}
+
+@Html.Partial("CreateEventTwo/ViewModels/_NewCreateViewModel")
+

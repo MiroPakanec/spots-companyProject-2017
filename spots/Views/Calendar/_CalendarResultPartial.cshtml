@@ -1,0 +1,12 @@
+﻿@model IEnumerable<spots.Modules.Calendar.Interfaces.IDayUnit>
+
+<div id="day-unit-container">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-1 border-right border-standard">
+            @Html.Partial("_DayUnitPartial", item)
+        </div>
+    }
+</div>
+
+@Html.Partial("ViewModels/_CalendarResultViewModel")

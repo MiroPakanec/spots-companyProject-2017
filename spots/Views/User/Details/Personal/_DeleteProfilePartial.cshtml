@@ -1,0 +1,17 @@
+﻿@using Microsoft.AspNet.Identity
+@model spots.Models.User.ViewModels.UserPersonalViewModel
+
+@if (Model.Email == User.Identity.GetUserName())
+{
+    <div class="row">
+        <div class="col-xs-4 col-xs-offset-0">
+            <!--Delete button-->
+            <a href="@Url.Action("DeleteProfileConfirm", "User")" title="Save" class="btn btn-sm btn-block btn-confirm">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                I would like to delete my profile
+            </a>
+        </div>
+    </div>
+}
+
+

@@ -1,0 +1,28 @@
+﻿@model IEnumerable<spots.Models.User.UserBusiness>
+
+    @{
+    const string title = "Businesses";
+    }
+
+    <!--Picture-->
+    @Html.Partial("Details/Shared/_ProfilePicturePartial")
+
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            <div class="row">
+                <div class="col-sm-12 text-sm">
+                    <p class="no-padding no-margin color-standard text-left text-md">@title</p>
+                </div>
+            </div>
+            <hr class="border-standard-light mg-xs-up" />
+
+            <div class="row">
+                @foreach (var business in Model)
+                {
+                    @Html.Partial("Details/Business/_UserBusiness", business)
+                }
+            </div>
+        </div>
+    </div>
+
+

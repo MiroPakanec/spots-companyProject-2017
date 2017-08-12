@@ -1,0 +1,116 @@
+﻿<script type="text/javascript">
+
+    var ContactViewModel = function () {
+        var self = this;
+
+        self.id = '@Model.MongoId';
+        self.email = '@Model.Email';
+        self.city = ko.observable('@Model.City');
+        self.phone = ko.observable('@Model.Phone');
+        self.token = ko.computed(function () {
+            var form = $('#contactDetailsForm');
+            return $('input[name="__RequestVerificationToken"]', form).val();
+        });
+
+        self.cityInput = ko.observable("@Model.City");
+        self.phoneInput = ko.observable("@Model.Phone");
+
+        self.serialized = ko.computed(function () {
+
+            var data = {};
+
+            data["Id"] = self.id;
+            data["Email"] = self.email;
+
+            data["City"] = self.cityInput();
+            data["Phone"] = self.phoneInput();
+
+            data["__RequestVerificationToken"] = self.token();
+
+            return data;
+        });
+
+        self.isRemoveable = function (observableInput) {
+
+            if (observableInput().length <= 0)
+                return false;
+
+            return true;
+        }
+
+        self.isConfirmable = function (observableModel, observableModelInput) {
+            if (observableModel() === observableModelInput())
+                return false;
+
+            return true;
+        }
+
+        self.areAllConfirmable = function () {
+            if (self.isConfirmable(self.city, self.cityInput) ||
+                self.isConfirmable(self.phone, self.phoneInput)) {
+
+                return true;
+            }
+
+            return false;
+        }
+
+        self.clearInput = function (observableInput) {
+
+            observableInput("");
+        }
+
+        self.setInput = function (observableInput, observableModel) {
+            observableInput(observableModel());
+        }
+
+        self.setModel = function(observableModel, observableInput) {
+            observableModel(observableInput());
+        }
+
+        self.updateInputs = function () {
+            self.cityInput(self.city());
+            self.phoneInput(self.phone());
+        }
+
+        self.updateModel = function () {
+
+            self.city(self.cityInput());
+            self.phone(self.phoneInput());
+        }
+
+        self.submitOne = function (observableInput, key, observableModel) {
+
+            var data = self.serialized();
+            data[key] = observableInput();
+
+            SubmitOne(function (response, target) {
+
+                $(target).html(response);
+
+                if($(target).find("#response").hasClass("has-success")){
+                    self.setModel(observableModel, observableInput);
+                }
+            }, data);
+        }
+
+        self.submit = function() {
+
+            var data = self.serialized();
+
+            CreateLocation(function(response, target) {
+
+                $(target).html(response);
+                if ($(target).find("#response").hasClass("has-success")) {
+                    self.updateModel();
+                }
+            }, data);
+        }
+
+    }
+
+    var contactViewModel = new ContactViewModel();
+    ko.applyBindings(contactViewModel, document.getElementById("contact-details"));
+
+</script>
+

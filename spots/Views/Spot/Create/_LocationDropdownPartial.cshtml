@@ -1,0 +1,35 @@
+﻿@model IEnumerable<spots.Models.Business.Interfaces.IBusinessHeadquaters>
+
+<div id="locations-dropdown" class="form-group row">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+        <div class="row">
+            <div class="col-xs-3">
+                @Html.Label("Location", htmlAttributes: new { @class = "control-label" })
+            </div>
+            <div class="col-md-8">
+                <div class="dropdown" role="menu">
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                        <span id="dropdown-selected-location" data-bind="html:locationName">
+                            Select Location
+                        </span>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-location">
+                        @foreach (var location in Model)
+                        {
+                            <li>
+                                <a href="#" id="location" class="optionLocation" data-bind="click: locationChange">@location.City</a>
+                                <input type="hidden" value="@location.Id.ToString()" />
+                            </li>
+                        }
+                    </ul>
+                    <div id="errorMessageLocation" class="text-danger field-validation-error" style="display: none;">
+                        Please select a location
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("ViewModels/_CreateSpotLocationViewModel")

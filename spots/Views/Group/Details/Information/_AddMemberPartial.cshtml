@@ -1,0 +1,47 @@
+﻿@model spots.Models.Group.ViewModels.CreateGroupViewModel
+
+<div class="row">
+            <div class="col-xs-12">
+                <!--Members-->
+                <div class="row">
+                    <div class="col-xs-10 col-xs-offset-0 mg-sm-up mg-sm-down border-all border-standard-light">
+                        <div class="row pd-md-down pd-md-up">
+                            <div class="col-xs-3 text-left">
+                                <!--Property name -->
+                                @Html.Label("Add member")
+                            </div>
+                            <form data-bind="submit: addMemberList.addItem">
+
+                                <div class="col-xs-6">
+                                    <input id="newMember" class="form-control" data-bind='value: addMemberList.newMember, valueUpdate: "afterkeydown"' , autocomplete="off" />
+                                    <div style="display: none;" data-bind="visible: true">
+                                        <span class="row text-danger text-center" data-bind="visible: addMemberList.alreadyInList()">This item is already in the list!</span>
+                                    </div>
+                                    <div data-bind="html:emailResponse"></div>
+                                    <span class="row text-info text-center" id="add-remove-user-response"></span>
+                                </div>
+                                <div class="col-xs-1">
+                                    <!--Confirm button-->
+                                    <button type="submit" class="btn btn-sm btn-add-member" data-bind="enable: addMemberList.confirmed, visible: addMemberList.isVisible(), click: submit.bind($data)">
+                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                                <div class="col-xs-1">
+                                    <!--Remove button-->
+                                    <button type="button" class="btn btn-sm" data-bind="click: addMemberList.resetMemberValue.bind($data, ''), visible: addMemberList.isVisible()">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <!--Property End-->
+            </div>
+        </div>
+
+
+@Html.Partial("ViewModels/CreateMemberListViewModel")
+@Html.Partial("ViewModels/_AddMemberViewModel")
+

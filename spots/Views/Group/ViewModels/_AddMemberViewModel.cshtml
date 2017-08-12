@@ -1,0 +1,91 @@
+﻿<script type="text/javascript">
+
+    var AddMemberViewModel = function() {
+
+        var self = this;
+
+        self.emailResponse = ko.observable("");
+        self.createdBy = ko.observable("@Model.CreatedBy");
+        self.memberNotify = ko.observable(true);
+        self.groupId = ko.observable(window.location.pathname.substring(15));
+        self.addMemberList = new MemberListViewModel();
+        self.sneakyUpdate = function (observableInput, observableNotify, value) {
+
+            observableNotify(false);
+            observableInput(value);
+            observableNotify(true);
+        };
+
+        self.clearInput = function (observable) {
+            observable("");
+        }
+
+        self.isRemoveable = function (observable){
+
+            if (observable().length > 0) {
+                return true;
+            }
+
+            return false;
+        }
+
+        self.submit = function () {
+
+            var url = "/Group/AddGroupMember?email=" + self.addMemberList.newMember() + "&groupId=" + self.groupId();
+
+            PushUser(function (response, target) {
+
+                $(target).html(response);
+                self.getMembers();
+                self.clearInput(self.addMemberList.newMember);
+            }, url);
+        }
+
+        self.removeUser = function (email) {
+
+            var url = "/Group/RemoveGroupMember?email=" + email + "&groupId=" + self.groupId();
+
+            RemoveUser(function (response, target) {
+
+                $(target).html(response);
+                self.getMembers();
+            }, url);
+        }
+
+        self.serialize = function() {
+
+            var data = {};
+            data["Members"] = self.addMemberList.output();
+
+            return data;
+        }
+
+        self.getMembers = function() {
+
+            var url = "/Group/GroupMembers?groupId=" + self.groupId();
+
+            GroupMembers(function (response, target) {
+
+                $(target).html(response);
+                $(".btn-remove-user").removeClass("invisible");
+            }, url);
+        }
+
+    }
+
+    var addMemberViewModel = new AddMemberViewModel();
+
+    /*Subscribers*/
+    addMemberViewModel.addMemberList.newMember.subscribe(function (value) {
+
+        if (addMemberViewModel.memberNotify()) {
+            SearchBoxUpdate(value, addMemberViewModel);
+        }
+        ConfirmUpdate(value, addMemberViewModel);
+    });
+
+    $(function () {
+        ko.applyBindings(addMemberViewModel, document.getElementById("addmember"));
+    });
+
+</script>

@@ -1,0 +1,11 @@
+﻿@model spots.Models.User.ViewModels.UserGroupNameListViewModel
+
+@foreach (var group in Model.UserGroups)
+{
+<div class="row">
+    <div class="col-xs-12 text-center">
+        <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+        @Html.ActionLink(group.Name, "Details", "Group", new {id = group.Id, @class = "btn btn-block btn-md btn-feature color-standard mg-xs-up"}, null)
+    </div>
+</div>
+}

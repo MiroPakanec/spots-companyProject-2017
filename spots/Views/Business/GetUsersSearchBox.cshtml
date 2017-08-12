@@ -1,0 +1,45 @@
+﻿@model IEnumerable<spots.Models.User.SpotUser>
+
+<div class="row response-box bg-color-standard-white border-all border-standard-light form-group custom-dropdown search-box">
+    @if (Model != null && Model.Any())
+    {
+        foreach (var item in Model)
+        {
+        <div class="col-xs-12 no-side-padding">
+            <a href="#" class="btn btn-block btn-sm btn-default border-none search-box-button pd-xs-left">
+                <input type="hidden" class="search-box-value" value="@item.Email" />
+                <div class="row">
+                    <div class="col-xs-2">
+                        <span class="glyphicon glyphicon-user"></span>
+                    </div>
+                    <div class="col-xs-9">
+                        <div class="row text-left">
+                            <div class="col-xs-12">
+                                @Html.Label(item.FirstName)
+                                @Html.Label(item.LastName)
+                            </div>
+                            <div class="col-xs-12">
+                                <span class="text-right">@item.Email</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        }
+    }
+    else
+    {
+    <div class="col-xs-12 no-side-padding">
+        <a href="#" class="btn btn-block btn-sm btn-default border-none search-box-button pd-xs-left">
+            <div class="row mg-lg-left mg-sm-down mg-sm-up mg-lg-right">
+                <div class="col-xs-12 text-center">
+                    No results found.
+                </div>
+            </div>
+            <input type="hidden" class="search-box-value" value="" />
+        </a>
+    </div>
+    }   
+</div>
+

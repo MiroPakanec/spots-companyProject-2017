@@ -1,0 +1,107 @@
+﻿@model spots.Models.Spot.ViewModels.CreateSpotViewModel
+
+@{
+    ViewBag.Title = "Create Spot";
+    Layout = "~/Views/Shared/_InLayout.cshtml";
+}
+
+@using (Html.BeginForm("Create", "Spot", FormMethod.Post, new {id = "createSpotForm"}))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row form-horizontal">
+        <div class="col-xs-12 col-md-6 col-md-offset-3">
+            <h2 class="text-center">Create Spot</h2>
+            <hr/>
+
+            <!--Business-->
+            <div id="businessDropdownResponse"></div>
+            <!--Locations-->
+            <div id="locationDropdownResponse"></div>
+            <!--Spot name-->
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-md-offset-2">
+                    <div class="form-group row">
+                        <div class="col-xs-3">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new {@class = "control-label"})
+                        </div>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Name, new {htmlAttributes = new {@class = "form-control", data_bind = "value:spotName, valueUpdate:'keyup'"}})
+                            @Html.ValidationMessageFor(model => model.Name, "", new {@class = "text-danger"})
+                        </div>
+                        <div class="col-xs-1">
+                            <!--Remove button-->
+                            <button type="button" class="btn btn-sm btn-remove" data-bind="visible: isRemoveable(spotName), click: remove.bind($data, viewModel.spotName)">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Capacity-->
+            <div class="form-group row">
+                <div class="col-xs-12 col-md-8 col-md-offset-2">
+                    <div class="row">
+                        <div class="col-xs-3">
+
+                            @Html.LabelFor(model => model.Capacity, htmlAttributes: new {@class = "control-label"})
+                        </div>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Capacity, new {htmlAttributes = new {@class = "form-control", data_bind = "value:capacity, valueUpdate:'keyup'"}})
+                            @Html.ValidationMessageFor(model => model.Capacity, "", new {@class = "text-danger"})
+                        </div>
+                        <div class="col-xs-1">
+                            <!--Remove button-->
+                            <button type="button" class="btn btn-sm btn-remove" data-bind="visible: isRemoveable(capacity), click: remove.bind($data, viewModel.capacity)">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Visible-->
+            <div class="form-group row">
+                <div class="col-xs-12 col-md-8 col-md-offset-2">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            @Html.LabelFor(model => model.Visible, htmlAttributes: new {@class = "control-label col-md-2"})
+                        </div>
+                        <div class="col-md-8">
+                            <div class="checkbox">
+                                @Html.EditorFor(model => model.Visible, new {htmlAttributes = new {data_bind = "checked:visible"}})
+                                @Html.ValidationMessageFor(model => model.Visible, "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--Available hours-->
+    @Html.Partial("Create/_AvailableHoursPartial")
+    <!--Buttons-->
+    <div class="form-group mg-md-up">
+        <div class="col-md-offset-7 col-md-4">
+            <input type="button" value="Create" class="btn btn-default" data-bind="click: submit.bind($data)"/>
+            <input type="button" value="Remove all" class="btn btn-default" data-bind="click: clearAllInputs.bind($data)">
+        </div>
+    </div>
+
+
+
+}
+<div class="row mg-lg-up">
+    <div class="col-xs-6 col-xs-offset-3">
+        <div id="spotCreate-ajax-response"></div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/CreateSpot")
+@Scripts.Render("~/bundles/jqueryval")
+@Styles.Render("~/bundles/cssval")
+
+@Styles.Render("~/Content/Spot")
+
+@Html.Partial("ViewModels/_AvailableHoursViewModel")
+@Html.Partial("ViewModels/_CreateSpotViewModel")

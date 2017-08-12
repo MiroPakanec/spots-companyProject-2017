@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>@ViewBag.Title - Spots</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/knockout")
+        @Scripts.Render("~/bundles/jquery")
+    </head>
+    <body class="bg-color-standard-light">
+        @Html.Partial("_NavbarPartial")
+    <div class="container-fluid body-content">
+        <div class="row">
+            <div class="col-xs-2 col-sm-2 screen-height-100 no-side-padding bg-color-standard-light">
+                @Html.Partial("_FeaturesPartial")
+            </div>
+            <div class="col-xs-10 col-sm-10 screen-height-100 bg-color-standard-white border-standard border-left">
+                <div class="row mg-lg-up">
+                    <div class="col-xs-12">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row color-standard bg-color-standard-dark">
+            <div class="col-xs-12 pd-md-up pd-md-down">
+                @Html.Partial("_FooterPartial")
+            </div>
+        </div>
+    </div>
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/tools")
+        @Scripts.Render("~/bundles/layoutScripts")
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

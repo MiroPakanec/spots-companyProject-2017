@@ -1,0 +1,11 @@
+﻿@model spots.Models.User.ViewModels.UserBusinessNameListViewModel
+
+@foreach (var business in Model.UserBusinesses)
+{
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>
+            @Html.ActionLink(business.Name, "Details", $"Business", new {id = business.Id, @class = "btn btn-block btn-md btn-feature color-standard mg-xs-up"}, null)
+        </div>
+    </div>
+}

@@ -1,0 +1,33 @@
+﻿<script>
+
+    var LocationViewModel = function () {
+
+        var self = this;
+
+        self.locationName = ko.observable("");
+        self.locationId = ko.observable("");
+
+        self.locationChange = function (data, event) {
+            var eventTarget = event.target || event.srcElement;
+
+            var id = $(eventTarget).next().val();
+            var name = $(eventTarget).html();
+
+            self.locationName(name);
+            self.locationId(id);
+        }
+
+        self.triggerLocationClick = function () {
+            $("#location").trigger("click");
+        }
+    }
+
+    var locationViewModel = new LocationViewModel();
+
+    $(function () {
+        ko.applyBindings(locationViewModel, document.getElementById("locations-dropdown"));
+
+        locationViewModel.triggerLocationClick();
+    });
+
+</script>

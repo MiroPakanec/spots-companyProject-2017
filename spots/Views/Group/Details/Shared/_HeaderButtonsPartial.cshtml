@@ -1,0 +1,26 @@
+﻿@{
+    var id = @Url.RequestContext.RouteData.Values["id"];
+}
+
+
+<div class="row">
+    <div class="col-xs-10 col-xs-offset-1">
+        <div class="row mg-md-up">
+            <div class="col-xs-2">
+                <button type="button" class="btn btn-sm btn-block btn-default tracked" data-bind="click: menuClick('/Group/GetInfo/@id')">
+                    <span class="glyphicon glyphicon-user tracked" aria-hidden="true"> Information</span>
+                </button>
+            </div>
+            <div class="col-xs-2">
+                <button type="button" class="btn btn-sm btn-block btn-default tracked" data-bind="click: menuClick.bind($data, '/Group/GetPosts/@id')">
+                    <span class="glyphicon glyphicon-send tracked" aria-hidden="true"> Posts</span>
+                </button>
+            </div>
+            <div class="col-xs-2">
+                <button type="button" class="btn btn-sm btn-block btn-default tracked" data-bind="click: menuClick.bind($data, '/Group/GetTimeline/@id')">
+                    <span class="glyphicon glyphicon-th-list tracked" aria-hidden="true"> Timeline</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

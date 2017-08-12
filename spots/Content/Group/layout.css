@@ -1,0 +1,14 @@
+﻿.row-unit {
+    height: 300px;
+    /*max-height: 300px;*/ /*TO DO WITH OR WITHOUT MAX HEIGHT*/
+
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.row-unit2x {
+    height: 400px;
+    /*max-height: 300px;*/ /*TO DO WITH OR WITHOUT MAX HEIGHT*/
+    overflow-y: auto;
+    overflow-x: hidden;
+}

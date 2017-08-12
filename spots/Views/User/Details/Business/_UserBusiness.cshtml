@@ -1,0 +1,47 @@
+﻿@model spots.Models.User.UserBusiness
+
+<div class="col-xs-3 mg-sm-down">
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1 bg-color-standard-light">
+            <!--Name-->
+            <div class="row">
+                <div class="col-xs-4 text-right">
+                    @Html.LabelFor(m => m.Name)
+                </div>
+                <div class="col-xs-8">
+                    @Html.ActionLink(Model.Name, "Details", "Business", new {id = Model.Id.ToString()}, null)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-4 text-right">
+                    @Html.LabelFor(m => m.Position)
+                </div>
+                <div class="col-xs-8">
+                    @Model.Position
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-4 text-right">
+                    @Html.LabelFor(m => m.StartDate)
+                </div>
+                <div class="col-xs-8">
+                    @Model.StartDateFormated
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-4 text-right">
+                    @Html.LabelFor(m => m.EndDate)
+                </div>
+                <div class="col-xs-8">
+                    @Model.EndDateFormated
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
